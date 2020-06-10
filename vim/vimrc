@@ -1,0 +1,137 @@
+syntax enable
+
+set termguicolors 
+colorscheme one 
+
+" Always show the status line at the bottom, even if you only have one window open.
+set laststatus=2
+set noerrorbells visualbell t_vb=	  " Disable audible bell because it's annoying
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+
+set autoindent
+set smartindent
+filetype indent on
+
+set noswapfile
+set number                          " show line numbers
+set nowrap
+set backspace=indent,eol,start
+set ignorecase                      " search is case-insensitive, until a capital letter is added
+set smartcase                       " search is case-insensitive, until a capital letter is added
+
+set incsearch                       " search as characters are entered
+set showcmd                         " display incomplete commands
+set wildmenu												" visual autocomplete for command menu
+
+
+let mapleader = " "
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>e :Lexplore<CR>
+nnoremap <leader>qq :bd<CR>
+
+
+" NETRW FILE BROWSER
+" ---- --
+let g:netrw_list_hide = netrw_gitignore#Hide() . '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_hide = 1
+let g:netrw_banner = 0              " disable annoying banner
+let g:netrw_altv = 1                " open to the right
+let g:netrw_liststyle = 3           " tree view
+let g:netrw_winsize = 25            " 25% of the screen 
+let g:netrw_browse_split = 4        " use the previous window to open file
+autocmd FileType netrw setlocal bufhidden=wipe
+
+
+" FUGITIVE
+" ---- --
+nnoremap <leader>gs :G<CR>
+nnoremap <leader>gc :Gdiffsplit<CR>
+
+
+" COMMENTARY
+" ---- --
+autocmd FileType c,typescript,javascript setlocal commentstring=//\ %s
+autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+
+
+" FZF / Ripgrep
+" ---- --
+set runtimepath+=/usr/local/opt/fzf
+nmap <leader>ff :GFiles<CR> 
+nnoremap <leader>b :Buffers<CR>
+
+" Allow passing optional flags into Rg
+"	Example: :Rg myterm -g '*.md'
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+
+
+" CONQUER OF COMPLETION
+" ---- --
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=number
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-tab> to trigger completion.
+inoremap <silent><expr> <c-tab> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" GoTo code navigation.
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+

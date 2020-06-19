@@ -73,27 +73,18 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias corsdev="open -n -a /Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --args --disable-web-security"
+alias todos="vim ~/Documents/notes/todos.md"
 
-export GITHUB_TOKEN=5dcbb738389d9b66c08352b3b353415c459f1006
+export GITHUB_TOKEN=
 export CONSUMER_MICROFRONTEND_PATH=/Users/o.askar/Documents/repos/pd-microfrontend
 export PFM_CONSUMER_FE_PATH=/Users/o.askar/Documents/repos/pd-consumer-frontend
 export PLATFORM=b2c
 export COUNTRY_CODE=sg
 export ISO_COUNTRY_CODE=sg
 export GLOBAL_ENTITY_ID=fp-sg
-export JFROG_NPM_REGISTRY_PASSWORD=QVA1amY4ZHFvVmtIR3BxZnkyR21GWVVCU015
+export JFROG_NPM_REGISTRY_PASSWORD=
 export PUBLIC_PATH=/vendor-list-microfrontend/build
 export APPLICATION=vendor-list-microfrontend
 export ENVIRONMENT=dev
-
-alias corsdev="open -n -a /Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --args --disable-web-security"
-alias todos="vim ~/Documents/notes/todos.md"
 

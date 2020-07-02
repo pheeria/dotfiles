@@ -1,6 +1,5 @@
-syntax enable
-
 set termguicolors 
+syntax enable
 colorscheme one 
 
 " Always show the status line at the bottom, even if you only have one window open.
@@ -22,6 +21,8 @@ set nowrap
 set backspace=indent,eol,start
 set ignorecase                      " search is case-insensitive, until a capital letter is added
 set smartcase                       " search is case-insensitive, until a capital letter is added
+
+set autoread
 
 set incsearch                       " search as characters are entered
 set showcmd                         " display incomplete commands
@@ -74,6 +75,13 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 
 " CONQUER OF COMPLETION
 " ---- --
+" Extensions
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-json',
+  \ 'coc-css'
+  \ ]
+
 " TextEdit might fail if hidden is not set.
 set hidden
 

@@ -34,7 +34,7 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>e :Lexplore<CR>
+nnoremap <leader>e :Lexplore %:p:h<CR>
 nnoremap <leader>qq :bd<CR>
 
 
@@ -72,6 +72,19 @@ nnoremap <leader>b :Buffers<CR>
 "	Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
 
+" Lightline
+" ---- --
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 " CONQUER OF COMPLETION
 " ---- --
@@ -79,6 +92,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-json',
+  \ 'coc-eslint',
   \ 'coc-css'
   \ ]
 

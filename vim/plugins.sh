@@ -6,4 +6,5 @@ git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/tpope/start/fugi
 git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/pack/typescript/start/typescript-vim
 git clone https://github.com/neoclide/coc.nvim.git ~/.vim/pack/coc/start/coc.nvim
 git clone https://github.com/junegunn/fzf.vim.git ~/.vim/pack/fzf/start/fzf
+git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/lightline/start/lightline
 

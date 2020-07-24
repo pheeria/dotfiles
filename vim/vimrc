@@ -4,7 +4,7 @@ colorscheme one
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
-set noerrorbells visualbell t_vb=	  " Disable audible bell because it's annoying
+set noerrorbells visualbell t_vb=	 " Disable audible bell because it's annoying
 
 set tabstop=4
 set shiftwidth=4
@@ -20,14 +20,15 @@ set number                          " show line numbers
 set nowrap
 set backspace=indent,eol,start
 set ignorecase                      " search is case-insensitive, until a capital letter is added
-set smartcase                       " search is case-insensitive, until a capital letter is added
+set smartcase
 
 set autoread
 
 set incsearch                       " search as characters are entered
 set showcmd                         " display incomplete commands
-set wildmenu												" visual autocomplete for command menu
+set wildmenu						" visual autocomplete for command menu
 
+autocmd FileType markdown,vimwiki setlocal spell spelllang=en
 
 let mapleader = " "
 nnoremap <leader>h :wincmd h<CR>
@@ -45,9 +46,17 @@ let g:netrw_hide = 1
 let g:netrw_banner = 0              " disable annoying banner
 let g:netrw_altv = 1                " open to the right
 let g:netrw_liststyle = 3           " tree view
+let g:netrw_fastbrowse = 0          " wipe empty buffers
 let g:netrw_winsize = 25            " 25% of the screen 
 let g:netrw_browse_split = 4        " use the previous window to open file
 autocmd FileType netrw setlocal bufhidden=wipe
+
+
+" UNDOTREE
+" ---- --
+set undodir=~/.vim/undodir
+set undofile
+nnoremap <leader>u :UndotreeToggle<CR>
 
 
 " FUGITIVE
@@ -58,7 +67,7 @@ nnoremap <leader>gc :Gdiffsplit<CR>
 
 " COMMENTARY
 " ---- --
-autocmd FileType c,typescript,javascript setlocal commentstring=//\ %s
+autocmd FileType c,typescript,javascript,typescriptreact setlocal commentstring=//\ %s
 autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 
 
@@ -71,6 +80,11 @@ nnoremap <leader>b :Buffers<CR>
 " Allow passing optional flags into Rg
 "	Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+
+" Vim Wiki
+" ---- --
+filetype plugin on
+let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
 
 " Lightline
 " ---- --

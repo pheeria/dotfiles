@@ -1,3 +1,17 @@
+Profiling
+
+[From Stack Overflow](https://stackoverflow.com/a/12216578)
+
+```vim
+:profile start profile.log
+:profile func *
+:profile file *
+" At this point do slow actions
+:profile pause
+:noautocmd qall!
+```
+
+
 Single number on a line:
 
 increment <C-a> decrement <C-x>

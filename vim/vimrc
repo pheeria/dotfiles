@@ -1,6 +1,8 @@
+set nocompatible
 set termguicolors 
 syntax enable
 colorscheme one 
+set background=dark
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2

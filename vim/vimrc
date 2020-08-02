@@ -1,7 +1,7 @@
 set nocompatible
 set termguicolors 
 syntax enable
-colorscheme one 
+colorscheme nord 
 set background=dark
 
 " Always show the status line at the bottom, even if you only have one window open.
@@ -25,6 +25,7 @@ set ignorecase                      " search is case-insensitive, until a capita
 set smartcase
 
 set autoread
+set lazyredraw
 
 set incsearch                       " search as characters are entered
 set showcmd                         " display incomplete commands
@@ -33,25 +34,7 @@ set wildmenu						" visual autocomplete for command menu
 autocmd FileType markdown,vimwiki setlocal spell spelllang=en
 
 let mapleader = " "
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>e :Lexplore %:p:h<CR>
 nnoremap <leader>qq :bd<CR>
-
-
-" NETRW FILE BROWSER
-" ---- --
-let g:netrw_list_hide = netrw_gitignore#Hide() . '\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_hide = 1
-let g:netrw_banner = 0              " disable annoying banner
-let g:netrw_altv = 1                " open to the right
-let g:netrw_liststyle = 3           " tree view
-let g:netrw_fastbrowse = 0          " wipe empty buffers
-let g:netrw_winsize = 25            " 25% of the screen 
-let g:netrw_browse_split = 4        " use the previous window to open file
-autocmd FileType netrw setlocal bufhidden=wipe
 
 
 " UNDOTREE
@@ -63,7 +46,6 @@ nnoremap <leader>u :UndotreeToggle<CR>
 
 " FUGITIVE
 " ---- --
-nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Gdiffsplit<CR>
 
 
@@ -76,9 +58,8 @@ autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 " FZF / Ripgrep
 " ---- --
 set runtimepath+=/usr/local/opt/fzf
-nmap <leader>ff :GFiles<CR> 
+nmap <leader>f :GFiles<CR> 
 nnoremap <leader>b :Buffers<CR>
-
 " Allow passing optional flags into Rg
 "	Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
@@ -92,7 +73,7 @@ let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
 " ---- --
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -107,6 +88,7 @@ let g:lightline = {
 " Extensions
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
+  \ 'coc-deno',
   \ 'coc-json',
   \ 'coc-eslint',
   \ 'coc-css'
@@ -172,4 +154,3 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
-

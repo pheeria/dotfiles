@@ -31,11 +31,17 @@ set incsearch                       " search as characters are entered
 set showcmd                         " display incomplete commands
 set wildmenu						" visual autocomplete for command menu
 
+set splitright
+set splitbelow
+set mouse=a
+
 autocmd FileType markdown,vimwiki setlocal spell spelllang=en
+set timeout timeoutlen=3000 ttimeoutlen=100
 
 let mapleader = " "
 nnoremap <leader>qq :bd<CR>
-
+nnoremap <leader>t :w<CR> :!yarn test %<CR>
+autocmd FileType netrw setlocal bufhidden=wipe
 
 " UNDOTREE
 " ---- --
@@ -64,10 +70,13 @@ nnoremap <leader>b :Buffers<CR>
 "	Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
 
+
 " Vim Wiki
 " ---- --
 filetype plugin on
 let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
+let g:vimwiki_global_ext = 0
+
 
 " Lightline
 " ---- --
@@ -154,3 +163,9 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
+
+" Different cursors for Insert and Normal modes
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+

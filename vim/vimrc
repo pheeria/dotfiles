@@ -19,6 +19,7 @@ filetype indent on
 
 set noswapfile
 set number                          " show line numbers
+set noemoji
 set nowrap
 set backspace=indent,eol,start
 set ignorecase                      " search is case-insensitive, until a capital letter is added
@@ -53,7 +54,9 @@ nnoremap <leader>u :UndotreeToggle<CR>
 " FUGITIVE
 " ---- --
 nnoremap <leader>gc :Gdiffsplit<CR>
-
+nnoremap <leader>gf :diffget //2<CR>
+nnoremap <leader>gj :diffget //3<CR>
+let g:fugitive_pty = 0
 
 " COMMENTARY
 " ---- --

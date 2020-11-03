@@ -1,0 +1,14 @@
+# Node
+npm-debug.log
+
+# Mac
+.DS_Store
+
+# vi
+*~
+.projections.json
+.lvimrc
+
+# General
+log/
+*.log

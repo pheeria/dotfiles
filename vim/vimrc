@@ -1,7 +1,7 @@
 set nocompatible
 set termguicolors 
 syntax enable
-colorscheme iceberg 
+colorscheme embark 
 set background=dark
 
 " Always show the status line at the bottom, even if you only have one window open.
@@ -36,7 +36,6 @@ set splitright
 set splitbelow
 set mouse=a
 
-autocmd FileType markdown,vimwiki setlocal spell spelllang=en
 set timeout timeoutlen=3000 ttimeoutlen=100
 
 let mapleader = " "
@@ -86,7 +85,7 @@ packadd vimwiki
 " ---- --
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'iceberg',
+      \ 'colorscheme': 'embark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -106,7 +105,7 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-css'
   \ ]
-
+let g:coc_node_path = '~/.nvm/versions/node/v14.8.0/bin/node'
 " TextEdit might fail if hidden is not set.
 set hidden
 

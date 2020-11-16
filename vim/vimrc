@@ -8,22 +8,18 @@ set background=dark
 set laststatus=2
 set noerrorbells visualbell t_vb=	 " Disable audible bell because it's annoying
 
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set smarttab
+set tabstop=4 shiftwidth=4
+set expandtab smarttab
 
-set autoindent
-set smartindent
-filetype indent on
+set autoindent smartindent
 
 set noswapfile
 set number                          " show line numbers
 set noemoji
 set nowrap
 set backspace=indent,eol,start
-set ignorecase                      " search is case-insensitive, until a capital letter is added
-set smartcase
+" search is case-insensitive, until a capital letter is added
+set ignorecase smartcase
 
 set autoread
 set lazyredraw
@@ -32,11 +28,15 @@ set incsearch                       " search as characters are entered
 set showcmd                         " display incomplete commands
 set wildmenu						" visual autocomplete for command menu
 
-set splitright
-set splitbelow
+set splitright splitbelow
 set mouse=a
 
 set timeout timeoutlen=3000 ttimeoutlen=100
+
+" Different cursors for Insert and Normal modes
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 let mapleader = " "
 nnoremap <leader>qq :bd<CR>
@@ -76,7 +76,6 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 
 " Vim Wiki
 " ---- --
-filetype plugin on
 let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
 let g:vimwiki_global_ext = 0
 packadd vimwiki
@@ -84,6 +83,7 @@ packadd vimwiki
 
 " Lightline
 " ---- --
+packadd lightline
 set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'embark',
@@ -99,6 +99,7 @@ let g:lightline = {
 " CONQUER OF COMPLETION
 " ---- --
 " Extensions
+packadd coc.nvim
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-deno',
@@ -106,13 +107,12 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-css'
   \ ]
-let g:coc_node_path = '~/.nvm/versions/node/v14.8.0/bin/node'
+let g:coc_node_path = '~/.nvm/versions/node/v14.15.0/bin/node'
 " TextEdit might fail if hidden is not set.
 set hidden
 
 " Some servers have issues with backup files
-set nobackup
-set nowritebackup
+set nobackup nowritebackup
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -168,8 +168,7 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 
-" Different cursors for Insert and Normal modes
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 
+filetype plugin indent on

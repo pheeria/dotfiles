@@ -1,0 +1,22 @@
+{
+    "eslint.autoFixOnSave": true,
+    "eslint.filetypes": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "javascriptreact"
+    ],
+    "javascript.suggestionActions.enabled": false,
+    "typescript.suggestionActions.enabled": false,
+    "typescript.format.enabled": true,
+    "typescript.format.semicolons": "insert",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+    "typescript.preferences.importModuleSpecifier": "non-relative"
+}

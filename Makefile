@@ -24,6 +24,7 @@ setup:
 vim:
 	mkdir -p ~/.vim/undodir
 	ln -s ./vim/vimrc ~/.vim/vimrc
+	cp ./vim/coc-settings.json ~/.vim/
 
 	$(github)/itchyny/lightline.vim.git $(themes)/lightline
 	$(github)/rakr/vim-one.git $(themes)/one

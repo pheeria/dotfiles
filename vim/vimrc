@@ -1,6 +1,5 @@
 set nocompatible
 set termguicolors 
-syntax enable
 colorscheme embark 
 set background=dark
 
@@ -76,14 +75,14 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 
 " Vim Wiki
 " ---- --
+packadd! vimwiki
 let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
 let g:vimwiki_global_ext = 0
-packadd vimwiki
 
 
 " Lightline
 " ---- --
-packadd lightline
+packadd! lightline
 set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'embark',
@@ -99,7 +98,7 @@ let g:lightline = {
 " CONQUER OF COMPLETION
 " ---- --
 " Extensions
-packadd coc.nvim
+packadd! coc.nvim
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-deno',
@@ -172,3 +171,4 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 
 filetype plugin indent on
+syntax enable

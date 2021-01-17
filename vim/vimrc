@@ -13,12 +13,13 @@ set expandtab smarttab
 set autoindent smartindent
 
 set noswapfile
-set number                          " show line numbers
+set number
 set noemoji
 set nowrap
 set backspace=indent,eol,start
 " search is case-insensitive, until a capital letter is added
 set ignorecase smartcase
+set scrolloff=8
 
 set autoread
 set lazyredraw
@@ -32,6 +33,8 @@ set mouse=a
 
 set timeout timeoutlen=3000 ttimeoutlen=100
 
+set exrc
+
 " Different cursors for Insert and Normal modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -40,6 +43,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 let mapleader = " "
 nnoremap <leader>qq :bd<CR>
 nnoremap <leader>t :w<CR> :!yarn test %<CR>
+nnoremap <leader>jt :w<CR> :!mvn test -Dtest='%:t:r'<CR>
 autocmd FileType netrw setlocal bufhidden=wipe
 
 " UNDOTREE
@@ -103,6 +107,9 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-deno',
   \ 'coc-json',
+  \ 'coc-java',
+  \ 'coc-go',
+  \ 'coc-pyright',
   \ 'coc-eslint',
   \ 'coc-css'
   \ ]

@@ -12,3 +12,9 @@ npm-debug.log
 # General
 log/
 *.log
+
+# CoC Metals
+.metals/
+.bloop/
+metals.sbt
+.ammonite/

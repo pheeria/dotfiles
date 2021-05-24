@@ -14,3 +14,11 @@ source $ZSH/oh-my-zsh.sh
 alias corsdev="open -n -a /Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --args --disable-web-security"
 alias vc="vim ~/Documents/Workspace/dotfiles/vim/vimrc"
 alias zc="vim ~/.zshrc"
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^X" edit-command-line
+
+finish() {
+    osascript -e "quit app \"$1\""
+}

@@ -49,6 +49,7 @@ vim:
 	$(github)/neoclide/coc.nvim.git $(plugins)/coc
 	$(github)/mbbill/undotree.git $(plugins)/undotree
 	$(github)/vimwiki/vimwiki.git $(plugins)/wiki
+	$(github)/vim-test/vim-test $(plugins)/test
 
 	$(github)/junegunn/goyo.vim.git $(writing)/goyo
 	$(github)/junegunn/limelight.vim.git $(writing)/limelight

@@ -8,6 +8,8 @@ npm-debug.log
 *~
 .projections.json
 .lvimrc
+.vimrc
+.vim/
 
 # General
 log/

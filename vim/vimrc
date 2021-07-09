@@ -38,6 +38,7 @@ set exrc
 
 " Vinegar, don't show dotfiles on start. Toggle with 'gh'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_keepdir = 0
 
 " Different cursors for Insert and Normal modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -46,8 +47,8 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 let mapleader = " "
 nnoremap <leader>qq :bd<CR>
-nnoremap <leader>vc :e ~/.vim/vimrc<CR>
-nnoremap <leader>zc :e ~/.zshrc<CR>
+nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
+nnoremap <leader>zc :vs ~/.zshrc<CR>
 autocmd FileType netrw setlocal bufhidden=wipe
 
 " UNDOTREE
@@ -67,7 +68,7 @@ let g:fugitive_pty = 0
 
 " COMMENTARY
 " ---- --
-autocmd FileType c,typescript,javascript,typescriptreact setlocal commentstring=//\ %s
+autocmd FileType c,typescript,javascript,typescriptreact,hocon setlocal commentstring=//\ %s
 autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 
 
@@ -203,9 +204,53 @@ let g:lightline = {
 " Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
+
+" REPL
+" ---- --
+let g:repl_program = {
+            \   'python': 'python3',
+            \   'default': 'zsh',
+            \   'javascript': 'node',
+            \   'scala': 'scala',
+            \   }
+let g:repl_exit_commands = {
+			\	'node': '.exit',
+			\	'scala': ':quit',
+			\	}
+let g:repl_console_name = 'Sälem, Älem!'
+let g:repl_python_automerge = 1
+let g:repl_output_copy_to_register = "t"
+nnoremap <leader>re :REPLToggle<Cr>
+let g:sendtorepl_invoke_key = "<leader>rr"
+let g:repl_position = 3
+
+
+
 set noshowmode
 set noshowmode
 filetype plugin indent on
 syntax enable
 hi Normal guibg=NONE ctermbg=NONE
+
+
+" MacOS Yank
+" Sends default register to terminal TTY using OSC 52 escape sequence
+function Osc52Yank()
+    let buffer=system('base64 | tr -d "\n"', @0)
+    let buffer='\033]52;c;'.buffer.'\033\'
+    silent exe "!echo -ne ".shellescape(buffer).
+        \ " > ".(exists('g:tty') ? shellescape(g:tty) : '/dev/tty')
+endfunction
+
+" Like Osc52Yank, except send all the contents to a single line
+function Osc52YankOneLine()
+  let @"=substitute(@", '\n', '', 'g')
+  call Osc52Yank() | redraw!
+endfunction
+
+" Automatically call OSC52 function on yank to sync register with host clipboard
+augroup Yank
+  autocmd!
+  autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
+augroup END
 

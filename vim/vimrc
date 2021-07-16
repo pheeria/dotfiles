@@ -1,44 +1,60 @@
 set termguicolors 
 colorscheme embark 
+
+" Nvim defaults
+" --------------
 set background=dark
 
-" Always show the status line at the bottom, even if you only have one window open.
-set laststatus=2
-set noerrorbells visualbell t_vb=	 " Disable audible bell because it's annoying
+" Backspace should be able to remove the text inserted before
+set backspace=indent,eol,start
 
+" Visual autocomplete for command menu
+set wildmenu
+" Display incomplete commands
+set showcmd
+
+" Search as characters are entered
+set incsearch
+" Always show the status line at the bottom, even if you only have one window open
+set laststatus=2
+" Disable audible bell because it's annoying
+set noerrorbells visualbell t_vb= 	 
+
+" Read if a file was changed outside of Vim
+set autoread
+
+" Tabs and indentation
+set autoindent
 set tabstop=4 shiftwidth=4
 set expandtab smarttab
 
-set autoindent
 
 set noswapfile
 set number
 set noemoji
 set nowrap
-set backspace=indent,eol,start
 " search is case-insensitive, until a capital letter is added
 set ignorecase smartcase
 set scrolloff=8
 
-set autoread
 set lazyredraw
-
-set incsearch                       " search as characters are entered
-set showcmd                         " display incomplete commands
-set wildmenu						" visual autocomplete for command menu
-set formatoptions+=j                " Delete comment character when joining commented lines
+" Delete comment character when joining commented lines
+set formatoptions+=j
 
 
 set splitright splitbelow
+" Allow scrolling, resizing and clicking with mouse
 set mouse=a
 
 set timeout timeoutlen=3000 ttimeoutlen=100
 
+" Allow local .vimrc per directory
 set exrc
 
 " Vinegar, don't show dotfiles on start. Toggle with 'gh'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_keepdir = 0
+autocmd FileType netrw setlocal bufhidden=wipe
 
 " Different cursors for Insert and Normal modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -49,7 +65,6 @@ let mapleader = " "
 nnoremap <leader>qq :bd<CR>
 nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
 nnoremap <leader>zc :vs ~/.zshrc<CR>
-autocmd FileType netrw setlocal bufhidden=wipe
 
 " UNDOTREE
 " ---- --
@@ -81,6 +96,22 @@ nnoremap <leader>b :Buffers<CR>
 "	Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
 
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Vim Wiki
 " ---- --
@@ -102,7 +133,6 @@ let g:test#javascript#runner = 'jest'
 packadd! coc.nvim
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
-  \ 'coc-deno',
   \ 'coc-json',
   \ 'coc-java',
   \ 'coc-go',
@@ -159,9 +189,9 @@ else
 endif
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <silent><leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <silent><leader>qf  <Plug>(coc-fix-current)
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -183,26 +213,34 @@ endfunc
 
 " Lightline
 " ---- --
-packadd! lightline
+" packadd! lightline
 
-let g:lightline = {
-      \ 'colorscheme': 'embark',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
-      \             [ 'coc' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
-      \   'coc': 'coc#status'
-      \ },
-      \ }
-
-" Use autocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+" let g:lightline = {
+"       \ 'colorscheme': 'embark',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+"       \             [ 'coc' ] ],
+"       \   'right': [ [ 'percent' ],
+"       \              [ 'filetype' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'FugitiveHead'
+"       \ },
+"       \ 'mode_map': {
+"       \   'n' : 'N',
+"       \   'i' : 'I',
+"       \   'R' : 'R',
+"       \   'v' : 'V',
+"       \   'V' : 'VL',
+"       \   "\<C-v>": 'VB',
+"       \   'c' : 'C',
+"       \   's' : 'S',
+"       \   'S' : 'SL',
+"       \   "\<C-s>": 'SB',
+"       \   't': 'T',
+"       \ },
+"       \ }
 
 
 " REPL
@@ -225,17 +263,15 @@ let g:sendtorepl_invoke_key = "<leader>rr"
 let g:repl_position = 3
 
 
-
-set noshowmode
-set noshowmode
+" set noshowmode
 filetype plugin indent on
 syntax enable
-hi Normal guibg=NONE ctermbg=NONE
+highlight Normal guibg=NONE ctermbg=NONE
 
 
 " MacOS Yank
 " Sends default register to terminal TTY using OSC 52 escape sequence
-function Osc52Yank()
+function! Osc52Yank()
     let buffer=system('base64 | tr -d "\n"', @0)
     let buffer='\033]52;c;'.buffer.'\033\'
     silent exe "!echo -ne ".shellescape(buffer).
@@ -243,7 +279,7 @@ function Osc52Yank()
 endfunction
 
 " Like Osc52Yank, except send all the contents to a single line
-function Osc52YankOneLine()
+function! Osc52YankOneLine()
   let @"=substitute(@", '\n', '', 'g')
   call Osc52Yank() | redraw!
 endfunction
@@ -254,3 +290,35 @@ augroup Yank
   autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
 augroup END
 
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    highlight statusline guibg=#00afca ctermfg=6 guifg=#fec50c ctermbg=0
+  elseif a:mode == 'r'
+    highlight statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
+  else
+    highlight statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
+  endif
+endfunction
+
+autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
+autocmd InsertLeave * highlight statusline guibg=#483162 guifg=White gui=BOLD
+
+" default the statusline to green when entering Vim
+highlight statusline guibg=#483162 guifg=White gui=BOLD
+
+
+highlight User1 guibg=#00afca guifg=#fec50c gui=BOLD
+highlight User2 guibg=#ffce00 guifg=#dd0000 gui=BOLD
+highlight User3 guibg=White   guifg=#483162 
+
+" Formats the statusline
+set statusline=%3*\ %{fugitive#head()}\ %0*
+set statusline+=\ %t\   "file name
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+
+
+set statusline+=\ %=      "align left
+set statusline+=%3*%y%0*       "filetype
+set statusline+=\ %3.3p%%\    "line X of Y [percent of file]
+set statusline+=\ 🖖\ 

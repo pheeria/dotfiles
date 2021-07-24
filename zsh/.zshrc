@@ -20,7 +20,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
 
 alias corsdev="open -n -a /Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --args --disable-web-security"
-alias vc="vim ~/Documents/Workspace/dotfiles/vim/vimrc"
+alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
 alias bl="vim -u ~/Documents/Workspace/bl/vimrc ~/Documents/Workspace/bl/blaue_laube.md"
 

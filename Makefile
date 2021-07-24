@@ -14,14 +14,14 @@ setup:
 	# Install Homebrew and Brewfile targets
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 	brew bundle
-	# Make Home and End work like a charm
-	mkdir -p ~/Library/KeyBindings
-	cp ./DefaultKeyBinding.dict ~/Library/KeyBindings
 
 stow:
 	stow git
 	stow zsh
 	stow vim
+	stow nvim
+	# Make Home and End work like a charm
+	stow misc
 
 vim:
 	$(github)/itchyny/lightline.vim.git $(themes)/lightline

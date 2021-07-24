@@ -5,6 +5,25 @@
 3. Adds global git config
 4. Installs and configures Vim
 
+## Set System Preferences
+
+### Keyboard
+1. Remap CapsLock to Escape `System Preferences -> Keyboard -> Modifier Keys`
+2. Set `Input Sources` to `Kazakh` and `ABC - Extended`
+
+### Monitor
+1. Turn OFF `Font smoothing` in `System Preferences -> General`
+2. For Big Sur:
+```shell
+defaults -currentHost write -g AppleFontSmoothing -int 0
+```
+3. In `System Preferences -> Display` set `Resolution: Scaled` and select the middle choice
+
+[Source - nikitonsky](https://tonsky.me/blog/monitors/)
+
+## iTerm
+1. General -> Preferences -> Load Preferences from a custom folder
+
 ## Fonts
 1. [Hermit](https://github.com/pcaro90/hermit)
 2. [Cascadia Code](https://github.com/microsoft/cascadia-code)

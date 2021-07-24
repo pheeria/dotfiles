@@ -1,0 +1,292 @@
+set termguicolors
+colorscheme embark
+
+" Nvim defaults
+" --------------
+set background=dark
+
+" Backspace should be able to remove the text inserted before
+set backspace=indent,eol,start
+
+" Visual autocomplete for command menu
+set wildmenu
+" Display incomplete commands
+set showcmd
+
+" Search as characters are entered
+set incsearch
+" Always show the status line at the bottom, even if you only have one window open
+set laststatus=2
+" Disable audible bell because it's annoying
+set noerrorbells visualbell t_vb= 	 
+
+" Read if a file was changed outside of Vim
+set autoread
+
+" Tabs and indentation
+set autoindent
+set tabstop=4 shiftwidth=4
+set expandtab smarttab
+
+set noswapfile
+set number
+set noemoji
+set nowrap
+" search is case-insensitive, until a capital letter is added
+set ignorecase smartcase
+set scrolloff=8
+
+set lazyredraw
+" Delete comment character when joining commented lines
+set formatoptions+=j
+
+
+set splitright splitbelow
+" Allow scrolling, resizing and clicking with mouse
+set mouse=a
+
+set timeout timeoutlen=3000 ttimeoutlen=100
+
+" Allow local .vimrc per directory
+set exrc
+
+" Vinegar, don't show dotfiles on start. Toggle with 'gh'
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_keepdir = 0
+autocmd FileType netrw setlocal bufhidden=wipe
+
+" Different cursors for Insert and Normal modes
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+let mapleader = " "
+nnoremap <leader>qq :bd<CR>
+nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
+nnoremap <leader>zc :vs ~/.zshrc<CR>
+
+" UNDOTREE
+" ---- --
+set undodir=~/.vim/undodir
+set undofile
+nnoremap <leader>u :UndotreeToggle<CR>
+
+
+" FUGITIVE
+" ---- --
+nnoremap <leader>gc :Gdiffsplit<CR>
+nnoremap <leader>gf :diffget //2<CR>
+nnoremap <leader>gj :diffget //3<CR>
+" Fix git hooks output for husky
+let g:fugitive_pty = 0
+
+" COMMENTARY
+" ---- --
+autocmd FileType c,typescript,javascript,typescriptreact,hocon setlocal commentstring=//\ %s
+autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+
+
+" FZF / Ripgrep
+" ---- --
+set runtimepath+=/usr/local/opt/fzf
+nmap <leader>f :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
+" Allow passing optional flags into Rg
+"	Example: :Rg myterm -g '*.md'
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Vim Wiki
+" ---- --
+packadd! vimwiki
+let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
+let g:vimwiki_global_ext = 0
+
+
+" Test
+nnoremap <leader>t :w<CR> :TestFile<CR>
+let test#strategy = 'vimterminal'
+let test#java#runner = 'gradletest'
+let test#scala#runner = 'sbttest'
+let g:test#javascript#runner = 'jest'
+
+" CONQUER OF COMPLETION
+" ---- --
+" Extensions
+packadd! coc.nvim
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-json',
+  \ 'coc-java',
+  \ 'coc-go',
+  \ 'coc-pyright',
+  \ 'coc-eslint',
+  \ 'coc-vetur',
+  \ 'coc-css'
+  \ ]
+let g:coc_node_path = '~/.nvm/versions/node/v14.15.0/bin/node'
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files
+set nobackup nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=number
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-tab> to trigger completion.
+inoremap <silent><expr> <c-tab> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <silent><leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <silent><leader>qf  <Plug>(coc-fix-current)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" GoTo code navigation.
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+
+nmap <expr> <silent> <leader>sd <SID>select_current_word()
+function! s:select_current_word()
+  if !get(b:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
+
+" REPL
+" ---- --
+let g:repl_program = {
+            \   'python': 'python3',
+            \   'default': 'zsh',
+            \   'javascript': 'node',
+            \   'scala': 'scala',
+            \   }
+let g:repl_exit_commands = {
+			\	'node': '.exit',
+			\	'scala': ':quit',
+			\	}
+let g:repl_console_name = 'Sälem, Älem!'
+let g:repl_python_automerge = 1
+let g:repl_output_copy_to_register = "t"
+nnoremap <leader>re :REPLToggle<Cr>
+let g:sendtorepl_invoke_key = "<leader>rr"
+let g:repl_position = 3
+
+
+" set noshowmode
+filetype plugin indent on
+syntax enable
+highlight Normal guibg=NONE ctermbg=NONE
+
+
+" MacOS Yank
+" Sends default register to terminal TTY using OSC 52 escape sequence
+function! Osc52Yank()
+    let buffer=system('base64 | tr -d "\n"', @0)
+    let buffer='\033]52;c;'.buffer.'\033\'
+    silent exe "!echo -ne ".shellescape(buffer).
+        \ " > ".(exists('g:tty') ? shellescape(g:tty) : '/dev/tty')
+endfunction
+
+" Like Osc52Yank, except send all the contents to a single line
+function! Osc52YankOneLine()
+  let @"=substitute(@", '\n', '', 'g')
+  call Osc52Yank() | redraw!
+endfunction
+
+" Automatically call OSC52 function on yank to sync register with host clipboard
+augroup Yank
+  autocmd!
+  autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
+augroup END
+
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    highlight statusline guibg=#00afca ctermfg=6 guifg=#fec50c ctermbg=0
+  elseif a:mode == 'r'
+    highlight statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
+  else
+    highlight statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
+  endif
+endfunction
+
+autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
+autocmd InsertLeave * highlight statusline guibg=#483162 guifg=White gui=BOLD
+
+" default the statusline to green when entering Vim
+highlight statusline guibg=#483162 guifg=White gui=BOLD
+
+
+highlight User1 guibg=#00afca guifg=#fec50c gui=BOLD
+highlight User2 guibg=#ffce00 guifg=#dd0000 gui=BOLD
+highlight User3 guibg=White   guifg=#483162 
+
+" Formats the statusline
+set statusline=%3*\ %{fugitive#head()}\ %0*
+set statusline+=\ %t\   "file name
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+
+
+set statusline+=\ %=          "align left
+set statusline+=%3*%y%0*      "filetype
+set statusline+=\ %3.3p%%\    "line X of Y [percent of file]
+set statusline+=\ 🖖\ 
+

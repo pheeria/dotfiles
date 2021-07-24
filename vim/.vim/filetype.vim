@@ -1,0 +1,1 @@
+autocmd BufNewFile,BufRead Jenkinsfile,Jenkinsfile_deploy setfiletype groovy

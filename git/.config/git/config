@@ -1,0 +1,9 @@
+[core]
+	excludesfile = ~/.config/git/ignore
+[user]
+	name = pheeria
+	email = olzhas.askar@deliveryhero.com
+[pull]
+	ff = only
+[init]
+	defaultBranch = main

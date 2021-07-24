@@ -14,12 +14,12 @@ setup:
 	# Install Homebrew and Brewfile targets
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 	brew bundle
-	# Install global .gitignore
-	mkdir -p ~/.config/git
-	ln -s ./ignore ~/.config/git
 	# Make Home and End work like a charm
 	mkdir -p ~/Library/KeyBindings
 	cp ./DefaultKeyBinding.dict ~/Library/KeyBindings
+
+install:
+	stow git
 
 vim:
 	mkdir -p ~/.vim/undodir

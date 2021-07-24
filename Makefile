@@ -20,6 +20,7 @@ setup:
 
 install:
 	stow git
+	stow zsh
 
 vim:
 	mkdir -p ~/.vim/undodir

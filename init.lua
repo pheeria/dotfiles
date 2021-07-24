@@ -16,15 +16,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.api.nvim_exec(
-  [[
+cmd [[
   augroup Packer
     autocmd!
     autocmd BufWritePost init.lua PackerCompile
   augroup end
-]],
-  false
-)
+]]
 
 local use = require('packer').use
 require('packer').startup(function()
@@ -45,9 +42,9 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-compe' -- Autocompletion
   use 'vim-test/vim-test' -- Run all my tests
   use 'fenetikm/falcon' -- Colorscheme
-  use 'glacambre/firenvim' -- Neovim in browser!
   use 'kyazdani42/nvim-web-devicons' -- Tree Icons
   use 'kyazdani42/nvim-tree.lua' -- Tree with collapsed empty folders
+  use 'Olical/conjure' -- Clojure REPL
 end)
 
 opt.tabstop = 4
@@ -91,9 +88,11 @@ opt.updatetime = 250
 --Set colorscheme (order is important here)
 opt.termguicolors = true
 g.colors_name = 'falcon'
+cmd [[highlight Normal guibg=#020221]]
 
 --Remap space as leader key
 g.mapleader = ' '
+g.maplocalleader = ' '
 
 -- Telescope
 require('telescope').setup {
@@ -206,7 +205,7 @@ setup_servers()
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+  cmd "bufdo e" -- this triggers the FileType autocmd that starts the server
 end
 
 -- replace the default lsp diagnostic letters with prettier symbols
@@ -357,7 +356,7 @@ map('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
 
 
 -- Terminal, behave like in Vim!
-vim.api.nvim_exec(
+cmd(
   [[
   augroup Terminal
     autocmd!
@@ -370,7 +369,7 @@ vim.api.nvim_exec(
 
 
 -- Setup Nvim Tree
-map('n', '<leader>e', ':NvimTreeToggle<cr>')
+map('n', '<leader>x', ':NvimTreeToggle<cr>')
 g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 g.nvim_tree_group_empty = 1
 g.nvim_tree_hide_dotfiles = 1
@@ -386,4 +385,12 @@ cmd [[
   let test#scala#runner = 'sbttest'
   let g:test#javascript#runner = 'jest'
   let g:test#preserve_screen = 1
+]]
+
+cmd [[ set guifont=Fira_Code:h20 ]]
+cmd [[
+  augroup ConjureRemoveSponsor
+    autocmd!
+    autocmd BufWinEnter "conjure-log-*" "silent s/; Sponsored by @.*//e"
+  augroup end
 ]]

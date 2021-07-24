@@ -29,8 +29,9 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
   use 'tpope/vim-projectionist' -- Alternate files
-  use 'tpope/vim-surround' -- Alternate files
-  use 'tpope/vim-repeat' -- Alternate files
+  use 'tpope/vim-vinegar' -- File explorer
+  use 'tpope/vim-surround' -- Surround objects
+  use 'tpope/vim-repeat' -- Repeat surround
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
   -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -42,8 +43,6 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-compe' -- Autocompletion
   use 'vim-test/vim-test' -- Run all my tests
   use 'fenetikm/falcon' -- Colorscheme
-  use 'kyazdani42/nvim-web-devicons' -- Tree Icons
-  use 'kyazdani42/nvim-tree.lua' -- Tree with collapsed empty folders
   use 'Olical/conjure' -- Clojure REPL
 end)
 
@@ -367,16 +366,6 @@ cmd(
   false
 )
 
-
--- Setup Nvim Tree
-map('n', '<leader>x', ':NvimTreeToggle<cr>')
-g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
-g.nvim_tree_group_empty = 1
-g.nvim_tree_hide_dotfiles = 1
-g.nvim_tree_gitignore = 1
-g.nvim_tree_auto_open = 1
-g.nvim_tree_width = 40
-
 -- Vim Test
 map('n', '<leader>t', ':w<CR> :TestFile<CR>')
 cmd [[
@@ -387,7 +376,6 @@ cmd [[
   let g:test#preserve_screen = 1
 ]]
 
-cmd [[ set guifont=Fira_Code:h20 ]]
 cmd [[
   augroup ConjureRemoveSponsor
     autocmd!

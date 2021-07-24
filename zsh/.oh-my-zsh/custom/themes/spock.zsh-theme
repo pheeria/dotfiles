@@ -1,10 +1,5 @@
 # Inspired by https://github.com/tobyjamesthomas/pi
-PROMPT=' ${return_status} %{$fg[cyan]%}$(get_pwd)%{$reset_color%} $(git_prompt_info)${prompt_suffix}'
-
-local return_status="%(?:🖖:🤨)"
-local prompt_suffix="%{$fg[cyan]%}❯%{$reset_color%} "
-
-# by shashankmehta (https://github.com/shashankmehta)
+# and by shashankmehta (https://github.com/shashankmehta)
 function get_pwd(){
   git_root=$PWD
   while [[ $git_root != / && ! -e $git_root/.git ]]; do
@@ -20,7 +15,12 @@ function get_pwd(){
   echo $prompt_short_dir
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[yellow]%}"
+local return_status="%(?:🖖:🤨)"
+local prompt_suffix="%{$fg[cyan]%}❯%{$reset_color%} "
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+PROMPT=' ${return_status} %{$fg[cyan]%}$(get_pwd)%{$reset_color%} $(git_prompt_info)${prompt_suffix}'

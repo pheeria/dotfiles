@@ -2,8 +2,7 @@
 
 1. Installs Brew
 2. Fixes "Home" and "End" buttons for macOS
-3. Adds global git config
-4. Installs and configures Vim
+3. Installs and configures Vim, Neovim, OhMyZsh, iTerm2 and git
 
 ## Set System Preferences
 

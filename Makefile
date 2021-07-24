@@ -18,15 +18,12 @@ setup:
 	mkdir -p ~/Library/KeyBindings
 	cp ./DefaultKeyBinding.dict ~/Library/KeyBindings
 
-install:
+stow:
 	stow git
 	stow zsh
+	stow vim
 
 vim:
-	mkdir -p ~/.vim/undodir
-	ln -s ./vim/vimrc ~/.vim/vimrc
-	cp ./vim/coc-settings.json ~/.vim/
-
 	$(github)/itchyny/lightline.vim.git $(themes)/lightline
 	$(github)/rakr/vim-one.git $(themes)/one
 	$(github)/arcticicestudio/nord-vim.git $(themes)/nord

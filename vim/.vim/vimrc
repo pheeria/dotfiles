@@ -52,8 +52,13 @@ set exrc
 
 " Vinegar, don't show dotfiles on start. Toggle with 'gh'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+" Allow to move files to another (say, parent) directory
 let g:netrw_keepdir = 0
-autocmd FileType netrw setlocal bufhidden=wipe
+
+augroup Netrw
+    autocmd!
+    autocmd FileType netrw setlocal bufhidden=wipe
+augroup END
 
 " Different cursors for Insert and Normal modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -64,6 +69,12 @@ let mapleader = " "
 nnoremap <leader>qq :bd<CR>
 nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
 nnoremap <leader>zc :vs ~/.zshrc<CR>
+
+augroup RC
+    autocmd!
+    autocmd BufWritePost vimrc source %
+augroup END
+
 
 " UNDOTREE
 " ---- --
@@ -82,14 +93,17 @@ let g:fugitive_pty = 0
 
 " COMMENTARY
 " ---- --
-autocmd FileType c,typescript,javascript,typescriptreact,hocon setlocal commentstring=//\ %s
-autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+augroup Commentary
+    autocmd!
+    autocmd FileType c,typescript,javascript,typescriptreact,hocon setlocal commentstring=//\ %s
+    autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+augroup END
 
 
 " FZF / Ripgrep
 " ---- --
 set runtimepath+=/usr/local/opt/fzf
-nmap <leader>f :GFiles<CR>
+nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 " Allow passing optional flags into Rg
 "	Example: :Rg myterm -g '*.md'
@@ -267,8 +281,11 @@ function! InsertStatuslineColor(mode)
   endif
 endfunction
 
-autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
-autocmd InsertLeave * highlight statusline guibg=#483162 guifg=White gui=BOLD
+augroup Statusline
+    autocmd!
+    autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
+    autocmd InsertLeave * highlight statusline guibg=#483162 guifg=White gui=BOLD
+augroup END
 
 " default the statusline to green when entering Vim
 highlight statusline guibg=#483162 guifg=White gui=BOLD

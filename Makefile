@@ -23,6 +23,10 @@ stow:
 	# Make Home and End work like a charm
 	stow misc
 
+pip:
+	pip3 install lookatme
+	pip3 install duden
+
 vim:
 	$(github)/itchyny/lightline.vim.git $(themes)/lightline
 	$(github)/rakr/vim-one.git $(themes)/one

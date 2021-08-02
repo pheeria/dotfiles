@@ -19,9 +19,16 @@
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": false,
-  "java.home": "/Users/o.askar/Library/Java/JavaVirtualMachines/openjdk-16.0.1/Contents/Home",
   "java.trace.server": "verbose",
-  "java.import.gradle.jvmArguments": "--add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
   "java.jdt.ls.vmargs": "-javaagent:/Users/o.askar/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar",
-  "metals.enable": false
+  "metals.enable": false,
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }

@@ -105,9 +105,16 @@ augroup END
 set runtimepath+=/usr/local/opt/fzf
 nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap \ :Rg<CR>
 " Allow passing optional flags into Rg
 "	Example: :Rg myterm -g '*.md'
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
+  \   <bang>0)
 
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options

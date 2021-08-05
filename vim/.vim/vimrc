@@ -246,9 +246,10 @@ let g:repl_exit_commands = {
 let g:repl_console_name = 'Sälem, Älem!'
 let g:repl_python_automerge = 1
 let g:repl_output_copy_to_register = "t"
-nnoremap <leader>re :REPLToggle<Cr>
-let g:sendtorepl_invoke_key = "<leader>rr"
+let g:sendtorepl_invoke_key = "<leader>ee"
 let g:repl_position = 3
+nnoremap <leader>re :REPLToggle<cr>
+nnoremap <leader>er {v}:SendLineToREPL<cr>
 
 
 " set noshowmode

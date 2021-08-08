@@ -28,7 +28,6 @@ pip:
 	pip3 install duden
 
 vim:
-	$(github)/itchyny/lightline.vim.git $(themes)/lightline
 	$(github)/rakr/vim-one.git $(themes)/one
 	$(github)/arcticicestudio/nord-vim.git $(themes)/nord
 	$(github)/embark-theme/vim.git $(themes)/embark

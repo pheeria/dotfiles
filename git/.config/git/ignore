@@ -20,3 +20,6 @@ log/
 .bloop/
 metals.sbt
 .ammonite/
+
+# Ripgrep
+.rgignore

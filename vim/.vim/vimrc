@@ -304,49 +304,49 @@ let g:currentmode={
        \}
 
 function! SpocklineActive()
-    let l:result = ""
+    let result = ""
 
     if &filetype ==? "netrw"
-        let l:result .= " %F "
+        let result .= " %F "
     else
-        let l:branch = fugitive#head()
+        let branch = fugitive#head()
         let l:mode = g:currentmode[mode()]
 
         if l:mode ==? "I" || l:mode ==? "C"
-            let l:result .= "%#YellowOnBlue#"
+            let result .= "%#YellowOnBlue#"
         else
-            if strlen(l:branch) > 0
-                let l:result .= "%#PurpleOnWhite#"
+            if strlen(branch) > 0
+                let result .= "%#PurpleOnWhite#"
             else
-                let l:result .= "%#WhiteOnPurple#"
+                let result .= "%#WhiteOnPurple#"
             endif
         endif
-        let l:result .= " " . l:mode . " %*"
+        let result .= " " . l:mode . " %*"
 
-        if strlen(l:branch) > 0
-            let l:result .= " " . l:branch . " "
+        if strlen(branch) > 0
+            let result .= " " . branch . " "
         endif
 
-        let l:result .= "%#PurpleOnWhite# %t %*"   "file name
-        let l:result .= "%m"                       "modified flag
+        let result .= "%#PurpleOnWhite# %t %*"   "file name
+        let result .= "%m"                       "modified flag
 
-        let l:result .= "%="                       "align right
-        let l:result .= "%#PurpleOnWhite#%y%*"     "file type
-        let l:result .= " %3.3p%% "                "line X of Y [percent of file]
-        let l:result .= " 🖖 "
+        let result .= "%="                       "align right
+        let result .= "%#PurpleOnWhite#%y%*"     "file type
+        let result .= " %3.3p%% "                "line X of Y [percent of file]
+        let result .= " 🖖 "
     endif
 
     return result
 endfunction
 
 function! SpocklineInactive()
-    let l:result = ""
+    let result = ""
 
-    let l:result .= " %f "   "file name
-    let l:result .= "%m"     "modified flag
+    let result .= " %f "   "file name
+    let result .= "%m"     "modified flag
 
-    let l:result .= "%="     "align right
-    let l:result .= " 🤨 "
+    let result .= "%="     "align right
+    let result .= " 🤨 "
 
     return result
 endfunction

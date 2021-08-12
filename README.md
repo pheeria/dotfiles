@@ -1,7 +1,12 @@
 # dotfiles 🛠
+
+![Vim](./images/dotfiles.png)
+
+## Overview
 1. Installs Brew
 2. Fixes "Home" and "End" buttons for macOS
 3. Installs and configures Vim, Neovim, OhMyZsh, iTerm2 and git
+4. `fn + i` for iTerm2 and `fn + t` for Telegram
 
 ## Set System Preferences
 ### Keyboard

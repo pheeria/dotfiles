@@ -19,7 +19,6 @@ export MANPAGER="vim -M +MANPAGER -"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
 
-alias corsdev="open -n -a /Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --args --disable-web-security"
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
 alias bl="vim -u ~/Documents/Workspace/bl/vimrc ~/Documents/Workspace/bl/blaue_laube.md"
@@ -30,6 +29,7 @@ finish() {
     osascript -e "quit app \"$1\""
 }
 
+# Custom scripts per directory
 chpwd() {
   if [ -r $PWD/.custom.sh ]; then
     source $PWD/.custom.sh
@@ -45,7 +45,7 @@ export GOBIN=$GOPATH/bin
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# Traitor stuff
+# Node stuff
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

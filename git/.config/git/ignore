@@ -23,3 +23,9 @@ metals.sbt
 
 # Ripgrep
 .rgignore
+
+# Httpie
+rest.sh
+
+# Custom shell scripts per directory
+.custom.sh

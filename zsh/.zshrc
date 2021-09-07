@@ -30,13 +30,19 @@ finish() {
     osascript -e "quit app \"$1\""
 }
 
+chpwd() {
+  if [ -r $PWD/.custom.sh ]; then
+    source $PWD/.custom.sh
+  fi
+}
+
 # If I'll ever write in Go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
 # Fuzzy Finder written in Go
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Traitor stuff

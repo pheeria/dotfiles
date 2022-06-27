@@ -55,6 +55,7 @@ opt.emoji = false
 opt.splitbelow = true
 opt.splitright = true
 opt.signcolumn = 'number'
+opt.wrap = false
 
 --Incremental live completion
 opt.inccommand = 'nosplit'
@@ -92,6 +93,7 @@ cmd [[highlight Normal guibg=#020221]]
 --Remap space as leader key
 g.mapleader = ' '
 g.maplocalleader = ' '
+
 
 -- Telescope
 require('telescope').setup {
@@ -352,6 +354,7 @@ map('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 map('i', '<c-space>', 'compe#complete()', { expr = true })
 
 map('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
+map('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
 
 
 -- Terminal, behave like in Vim!
@@ -382,3 +385,4 @@ cmd [[
     autocmd BufWinEnter "conjure-log-*" "silent s/; Sponsored by @.*//e"
   augroup end
 ]]
+

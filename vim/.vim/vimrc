@@ -138,6 +138,7 @@ let g:fzf_colors =
 packadd! vimwiki
 let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
 let g:vimwiki_global_ext = 0
+let g:vimwiki_folding = 'custom'
 
 
 " Test
@@ -300,6 +301,7 @@ let g:currentmode={
        \ 'R'  : 'R',
        \ 'Rv' : 'V',
        \ 'c'  : 'C',
+       \ 's'  : 'S',
        \ 't'  : 'T',
        \}
 
@@ -358,3 +360,11 @@ augroup Spockline
 augroup END
 
 set statusline=%!SpocklineActive()
+
+
+let g:codi#interpreters = {
+   \ 'python': {
+       \ 'bin': 'python3',
+       \ 'prompt': '^\(>>>\|\.\.\.\) ',
+       \ },
+   \ }

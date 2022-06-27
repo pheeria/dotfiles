@@ -14,7 +14,7 @@
   "typescript.format.semicolons": "insert",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "prettier.semi": false,
+  "prettier.semi": true,
   "prettier.arrowParens": "avoid",
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,

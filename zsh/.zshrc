@@ -4,7 +4,7 @@ ZSH_THEME="spock"
 HYPHEN_INSENSITIVE="true"
 export UPDATE_ZSH_DAYS=13
 
-plugins=(git zsh-autosuggestions z)
+plugins=(git z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -16,6 +16,7 @@ bindkey "^X^X" edit-command-line
 export MANPAGER="vim -M +MANPAGER -"
 
 # DO NOT TRACK
+export PATH=$PATH:/opt/homebrew/bin
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
 

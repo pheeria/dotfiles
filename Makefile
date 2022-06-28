@@ -7,6 +7,8 @@ plugins = $(pack)/plugins/start
 writing = $(pack)/writing/opt
 github = git clone https://github.com
 
+.PHONY: salem setup stow pip vim
+
 salem:
 	@echo "Sälem, Älem!"
 

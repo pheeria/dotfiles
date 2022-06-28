@@ -1,5 +1,5 @@
 set termguicolors
-colorscheme embark
+colorscheme one
 
 " Nvim defaults
 " --------------
@@ -135,8 +135,7 @@ let g:fzf_colors =
 
 " Vim Wiki
 " ---- --
-packadd! vimwiki
-let g:vimwiki_list = [{'path': '~/Documents/Workspace/wiki/'}]
+let g:vimwiki_list = [{'path': '~/.wiki/'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_folding = 'custom'
 
@@ -151,7 +150,6 @@ let g:test#javascript#runner = 'jest'
 " CONQUER OF COMPLETION
 " ---- --
 " Extensions
-packadd! coc.nvim
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-json',
@@ -162,7 +160,7 @@ let g:coc_global_extensions = [
   \ 'coc-vetur',
   \ 'coc-css'
   \ ]
-let g:coc_node_path = '~/.nvm/versions/node/v14.15.0/bin/node'
+let g:coc_node_path = '/opt/homebrew/bin/node'
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -311,7 +309,7 @@ function! SpocklineActive()
     if &filetype ==? "netrw"
         let result .= " %F "
     else
-        let branch = fugitive#head()
+        let branch = FugitiveHead()
         let l:mode = g:currentmode[mode()]
 
         if l:mode ==? "I" || l:mode ==? "C"

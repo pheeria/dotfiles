@@ -102,7 +102,7 @@ augroup END
 
 " FZF / Ripgrep
 " ---- --
-set runtimepath+=/usr/local/opt/fzf
+set runtimepath+=/opt/homebrew/opt/fzf
 nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap \ :Rg<CR>
@@ -135,7 +135,7 @@ let g:fzf_colors =
 
 " Vim Wiki
 " ---- --
-let g:vimwiki_list = [{'path': '~/.wiki/'}]
+let g:vimwiki_list = [{'path': '~/.personal/wiki/'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_folding = 'custom'
 

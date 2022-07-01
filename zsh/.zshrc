@@ -24,7 +24,7 @@ export HOMEBREW_INSTALL_BADGE="🧉"
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
 alias sz="source ~/.zshrc"
-alias bl="vim -u ~/.code/bl/vimrc ~/.code/bl/blaue_laube.md"
+alias bl="vim -u ~/.personal/bl/vimrc ~/.personal/bl/blaue_laube.md"
 
 # Reinventing the wheel
 alias start="open -a "

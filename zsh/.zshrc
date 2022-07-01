@@ -18,11 +18,13 @@ export MANPAGER="vim -M +MANPAGER -"
 # DO NOT TRACK
 export PATH=$PATH:/opt/homebrew/bin
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_INSTALL_HINTS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
 
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
-alias bl="vim -u ~/Documents/Workspace/bl/vimrc ~/Documents/Workspace/bl/blaue_laube.md"
+alias sz="source ~/.zshrc"
+alias bl="vim -u ~/.code/bl/vimrc ~/.code/bl/blaue_laube.md"
 
 # Reinventing the wheel
 alias start="open -a "

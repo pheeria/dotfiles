@@ -15,7 +15,7 @@
 
 ### Monitor
 1. Turn OFF `Font smoothing` in `System Preferences -> General`
-2. For Big Sur:
+2. For Big Sur+:
 ```shell
 defaults -currentHost write -g AppleFontSmoothing -int 0
 ```
@@ -26,10 +26,20 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 ## Fonts
 1. [Hermit](https://github.com/pcaro90/hermit)
 2. [Cascadia Code](https://github.com/microsoft/cascadia-code)
+3. [Martian Mono](https://github.com/evilmartians/mono)
 
 ## iTerm
 1. Go to `General -> Preferences -> Load Preferences from a custom folder`
 2. Point to `dotfiles/iTerm`
+
+## Brew
+
+1. Use `brew dump` to create a dumpfile with all of the currently installed brew packages
+2. Use `brew bundle` to install all of the packages in the `Brewfile`
+
+## Further considerations
+1. Maybe use a tiling window manager like [Amethyst](https://ianyh.com/amethyst/) or [Yabai](https://github.com/koekeishiya/yabai)?
+
 
 ## Vim
 ### How to update Vim?

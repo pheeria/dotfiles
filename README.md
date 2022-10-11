@@ -36,6 +36,7 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 
 1. Use `brew dump` to create a dumpfile with all of the currently installed brew packages
 2. Use `brew bundle` to install all of the packages in the `Brewfile`
+3. [Tips & Tricks](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
 ## Further considerations
 1. Maybe use a tiling window manager like [Amethyst](https://ianyh.com/amethyst/) or [Yabai](https://github.com/koekeishiya/yabai)?

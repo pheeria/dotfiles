@@ -1,5 +1,5 @@
 set termguicolors
-colorscheme one
+colorscheme default
 
 " Nvim defaults
 " --------------

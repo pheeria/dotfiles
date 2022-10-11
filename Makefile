@@ -26,6 +26,7 @@ stow:
 	stow misc
 
 pip:
+	python3 -m pip install --upgrade pip
 	pip3 install lookatme
 	pip3 install duden
 
@@ -41,6 +42,7 @@ vim:
 	$(github)/tpope/vim-vinegar.git $(tpope)/vinegar
 	$(github)/tpope/vim-surround.git $(tpope)/surround
 	$(github)/tpope/vim-repeat.git $(tpope)/repeat
+	$(github)/tpope/vim-sleuth.git $(tpope)/sleuth
 
 	$(github)/junegunn/fzf.vim.git $(junegunn)/fzf
 	$(github)/junegunn/vim-peekaboo.git $(junegunn)/peekaboo

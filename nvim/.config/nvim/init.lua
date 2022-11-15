@@ -23,11 +23,12 @@ cmd [[
   augroup end
 ]]
 
-local use = require('packer').use
-require('packer').startup(function()
+local packer = require('packer')
+local use = packer.use
+packer.startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
   use 'tpope/vim-fugitive' -- Git commands in nvim
-  use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  use 'tpope/vim-commentary' -- 'gc' to comment visual regions/lines
   use 'tpope/vim-projectionist' -- Alternate files
   use 'tpope/vim-vinegar' -- File explorer
   use 'tpope/vim-surround' -- Surround objects

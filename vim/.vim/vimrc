@@ -227,10 +227,12 @@ nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 nmap <expr> <silent> <leader>sd <SID>select_current_word()
 function! s:select_current_word()
   if !get(b:, 'coc_cursors_activated', 0)
-    return "\<Plug>(coc-cursors-word)"
+      return "\<Plug>(coc-cursors-word)"
   endif
   return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-endfunc
+endfunction
+
+
 
 " REPL
 " ---- --

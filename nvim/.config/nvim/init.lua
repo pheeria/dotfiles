@@ -211,10 +211,11 @@ require'lspinstall'.post_install_hook = function ()
 end
 
 -- replace the default lsp diagnostic letters with prettier symbols
-fn.sign_define("LspDiagnosticsSignError", {text = "🔴", numhl = "LspDiagnosticsDefaultError"})
-fn.sign_define("LspDiagnosticsSignWarning", {text = "🟡", numhl = "LspDiagnosticsDefaultWarning"})
-fn.sign_define("LspDiagnosticsSignInformation", {text = "🔵", numhl = "LspDiagnosticsDefaultInformation"})
-fn.sign_define("LspDiagnosticsSignHint", {text = "🟢", numhl = "LspDiagnosticsDefaultHint"})
+local signs = { Error = '🔴', Warn = '🟡', Hint = '🔵', Info = '🟢' }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall

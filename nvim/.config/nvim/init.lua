@@ -40,7 +40,6 @@ packer.startup(function()
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'kabouzeid/nvim-lspinstall' -- Automatically install LSP servers
   use 'hrsh7th/nvim-compe' -- Autocompletion
   use 'fenetikm/falcon' -- Colorscheme
   use 'Olical/conjure' -- Clojure REPL
@@ -182,32 +181,8 @@ local function make_config()
   }
 end
 
--- lsp-install
-local function setup_servers()
-  require'lspinstall'.setup()
 
-  -- get all installed servers
-  local servers = require'lspinstall'.installed_servers()
 
-  for _, server in pairs(servers) do
-    local config = make_config()
-
-    -- language specific config
-    if server == "lua" then
-      config.settings = lua_settings
-    end
-
-    require'lspconfig'[server].setup(config)
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  cmd "bufdo e" -- this triggers the FileType autocmd that starts the server
-end
 
 -- replace the default lsp diagnostic letters with prettier symbols
 local signs = { Error = '🔴', Warn = '🟡', Hint = '🔵', Info = '🟢' }

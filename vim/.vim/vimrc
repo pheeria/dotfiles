@@ -138,6 +138,8 @@ let g:fzf_colors =
 let g:vimwiki_list = [{'path': '~/.personal/wiki/'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_folding = 'custom'
+" Vinegar Up is more important
+nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 
 
 " Test

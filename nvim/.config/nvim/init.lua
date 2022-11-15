@@ -201,13 +201,6 @@ lspconfig.pyright.setup{
     capabilities = capabilities
 }
 
--- replace the default lsp diagnostic letters with prettier symbols
-local signs = { Error = '🔴', Warn = '🟡', Hint = '🔵', Info = '🟢' }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {

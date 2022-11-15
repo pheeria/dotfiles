@@ -42,7 +42,6 @@ packer.startup(function()
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'kabouzeid/nvim-lspinstall' -- Automatically install LSP servers
   use 'hrsh7th/nvim-compe' -- Autocompletion
-  use 'vim-test/vim-test' -- Run all my tests
   use 'fenetikm/falcon' -- Colorscheme
   use 'Olical/conjure' -- Clojure REPL
 end)
@@ -370,16 +369,6 @@ cmd(
 ]],
   false
 )
-
--- Vim Test
-map('n', '<leader>t', ':w<CR> :TestFile<CR>')
-cmd [[
-  let test#strategy = 'neovim'
-  let test#java#runner = 'gradletest'
-  let test#scala#runner = 'sbttest'
-  let g:test#javascript#runner = 'jest'
-  let g:test#preserve_screen = 1
-]]
 
 cmd [[
   augroup ConjureRemoveSponsor

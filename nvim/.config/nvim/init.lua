@@ -88,7 +88,7 @@ opt.updatetime = 250
 
 --Set colorscheme (order is important here)
 opt.termguicolors = true
-g.colors_name = 'falcon'
+cmd [[colorscheme falcon]]
 cmd [[highlight Normal guibg=#020221]]
 
 --Remap space as leader key

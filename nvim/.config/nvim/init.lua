@@ -3,12 +3,6 @@ local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
 
-local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true, silent = true}
-  if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 -- Install packer
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
@@ -97,20 +91,10 @@ g.maplocalleader = ' '
 
 
 -- Telescope
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
---Add leader shortcuts
-map('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<CR>]])
-map('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]])
-map('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>b', builtin.buffers)
+vim.keymap.set('n', '<leader>f', builtin.find_files)
+vim.keymap.set('n', '<leader>g', builtin.live_grep)
 
 -- LSP settings
 -- keymaps
@@ -259,8 +243,8 @@ require('nvim-treesitter.configs').setup {
 -- Set completeopt to have a better completion experience
 opt.completeopt = 'menuone,noinsert'
 
-map('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
-map('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
+vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
+vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
 
 
 -- Terminal, behave like in Vim!

@@ -95,7 +95,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- keymaps
 local function on_attach(client, bufnr)
-  local opns = { silent=true, buffer=bufnr }
+  local opts = { silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)

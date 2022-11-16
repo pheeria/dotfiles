@@ -1,4 +1,3 @@
-local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
@@ -10,12 +9,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-cmd [[
+vim.cmd([[
   augroup Packer
     autocmd!
     autocmd BufWritePost init.lua PackerCompile
   augroup end
-]]
+]])
 
 local packer = require('packer')
 local use = packer.use
@@ -82,8 +81,11 @@ opt.updatetime = 250
 
 --Set colorscheme (order is important here)
 opt.termguicolors = true
-cmd [[colorscheme falcon]]
-cmd [[highlight Normal guibg=#020221]]
+vim.cmd([[
+    set termguicolors
+    colorscheme falcon
+    highlight Normal guibg=#020221
+]])
 
 --Remap space as leader key
 g.mapleader = ' '
@@ -103,7 +105,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- keymaps
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   -- Mappings.
   local opns = { silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -123,7 +125,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local has_words_before = function()
+local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
@@ -241,21 +243,18 @@ vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
 
 
 -- Terminal, behave like in Vim!
-cmd(
-  [[
+vim.cmd([[
   augroup Terminal
     autocmd!
     autocmd TermOpen * call feedkeys("i")
     autocmd TermClose * call feedkeys("i")
   augroup end
-]],
-  false
-)
+]])
 
-cmd [[
+vim.cmd([[
   augroup ConjureRemoveSponsor
     autocmd!
     autocmd BufWinEnter "conjure-log-*" "silent s/Sponsored//e"
   augroup end
-]]
+]])
 

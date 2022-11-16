@@ -15,25 +15,22 @@ vim.cmd([[
 local packer = require('packer')
 local use = packer.use
 packer.startup(function()
-  use('wbthomason/packer.nvim')-- Package manager
-  use('tpope/vim-fugitive')-- Git commands in nvim
-  use('tpope/vim-commentary')-- 'gc' to comment visual regions/lines
-  use('tpope/vim-projectionist')-- Alternate files
-  use('tpope/vim-vinegar')-- File explorer
-  use('tpope/vim-surround')-- Surround objects
-  use('tpope/vim-repeat')-- Repeat surround
-  -- UI to select things (files, grep results, open buffers...)
-  use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } })
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use('nvim-treesitter/nvim-treesitter')
-  -- Additional textobjects for treesitter
-  use('nvim-treesitter/nvim-treesitter-textobjects')
-  use('neovim/nvim-lspconfig')-- Collection of configurations for built-in LSP client
-  use('hrsh7th/cmp-nvim-lsp')-- Default capabilities (?!)
-  use('hrsh7th/nvim-cmp')-- Autocompletion
-  use('PaterJason/cmp-conjure')-- Conjure Autocompletion
-  use('fenetikm/falcon')-- Colorscheme
-  use('Olical/conjure')-- Clojure REPL
+  use('wbthomason/packer.nvim') -- Package manager
+  use('tpope/vim-fugitive') -- Git commands in nvim
+  use('tpope/vim-commentary') -- 'gc' to comment visual regions/lines
+  use('tpope/vim-projectionist') -- Alternate files
+  use('tpope/vim-vinegar') -- File explorer
+  use('tpope/vim-surround') -- Surround objects
+  use('tpope/vim-repeat') -- Repeat surround
+  use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }) -- UI to select things (files, grep results, open buffers...)
+  use('nvim-treesitter/nvim-treesitter') -- Highlight, edit, and navigate code using a fast incremental parsing library
+  use('nvim-treesitter/nvim-treesitter-textobjects') -- Additional textobjects for treesitter
+  use('neovim/nvim-lspconfig') -- Collection of configurations for built-in LSP client
+  use('hrsh7th/cmp-nvim-lsp') -- Default capabilities (?!)
+  use('hrsh7th/nvim-cmp') -- Autocompletion
+  use('PaterJason/cmp-conjure') -- Conjure Autocompletion
+  use('fenetikm/falcon') -- Colorscheme
+  use('Olical/conjure') -- Clojure REPL
 end)
 
 vim.opt.tabstop = 4
@@ -46,26 +43,16 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.signcolumn = 'number'
 
--- Set highlight on search
-vim.opt.hlsearch = false
-
--- Make line numbers default
-vim.wo.number = true
-
--- Enable break indent
-vim.opt.breakindent = true
-
--- Save undo history
-vim.opt.undofile = true
+vim.opt.hlsearch = false -- Set highlight on search
+vim.wo.number = true -- Make line numbers default
+vim.opt.breakindent = true -- Enable break indent
+vim.opt.undofile = true -- Save undo history
+vim.opt.updatetime = 250 -- Decrease update time
+vim.opt.completeopt = 'menuone,noinsert' -- Have a better completion experience
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
--- Decrease update time
-vim.opt.updatetime = 250
--- Set completevim.opt to have a better completion experience
-vim.opt.completeopt = 'menuone,noinsert'
 
 -- Set colorscheme (order is important here)
 vim.cmd([[
@@ -82,10 +69,10 @@ vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
 vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
 
 -- Telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>b', builtin.buffers)
-vim.keymap.set('n', '<leader>f', builtin.find_files)
-vim.keymap.set('n', '<leader>g', builtin.live_grep)
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<leader>b', telescope.buffers)
+vim.keymap.set('n', '<leader>f', telescope.find_files)
+vim.keymap.set('n', '<leader>g', telescope.live_grep)
 
 -- LSP settings
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -93,7 +80,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
--- keymaps
 local function on_attach(client, bufnr)
   local opts = { silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -162,7 +148,6 @@ for _, client in pairs(lsp_clients) do
         capabilities = capabilities
     })
 end
-
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall

@@ -15,25 +15,25 @@ vim.cmd([[
 local packer = require('packer')
 local use = packer.use
 packer.startup(function()
-  use 'wbthomason/packer.nvim' -- Package manager
-  use 'tpope/vim-fugitive' -- Git commands in nvim
-  use 'tpope/vim-commentary' -- 'gc' to comment visual regions/lines
-  use 'tpope/vim-projectionist' -- Alternate files
-  use 'tpope/vim-vinegar' -- File explorer
-  use 'tpope/vim-surround' -- Surround objects
-  use 'tpope/vim-repeat' -- Repeat surround
+  use('wbthomason/packer.nvim')-- Package manager
+  use('tpope/vim-fugitive')-- Git commands in nvim
+  use('tpope/vim-commentary')-- 'gc' to comment visual regions/lines
+  use('tpope/vim-projectionist')-- Alternate files
+  use('tpope/vim-vinegar')-- File explorer
+  use('tpope/vim-surround')-- Surround objects
+  use('tpope/vim-repeat')-- Repeat surround
   -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+  use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } })
   -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use 'nvim-treesitter/nvim-treesitter'
+  use('nvim-treesitter/nvim-treesitter')
   -- Additional textobjects for treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'hrsh7th/cmp-nvim-lsp' -- Default capabilities (?!)
-  use 'hrsh7th/nvim-cmp' -- Autocompletion
-  use 'PaterJason/cmp-conjure' -- Conjure Autocompletion
-  use 'fenetikm/falcon' -- Colorscheme
-  use 'Olical/conjure' -- Clojure REPL
+  use('nvim-treesitter/nvim-treesitter-textobjects')
+  use('neovim/nvim-lspconfig')-- Collection of configurations for built-in LSP client
+  use('hrsh7th/cmp-nvim-lsp')-- Default capabilities (?!)
+  use('hrsh7th/nvim-cmp')-- Autocompletion
+  use('PaterJason/cmp-conjure')-- Conjure Autocompletion
+  use('fenetikm/falcon')-- Colorscheme
+  use('Olical/conjure')-- Clojure REPL
 end)
 
 vim.opt.tabstop = 4
@@ -78,6 +78,8 @@ vim.cmd([[
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
+vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
 
 -- Telescope
 local builtin = require('telescope.builtin')
@@ -151,9 +153,8 @@ cmp.setup({
   })
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp_clients = {'clojure_lsp', 'pyright'}
 for _, client in pairs(lsp_clients) do
     lspconfig[client].setup({
@@ -217,10 +218,6 @@ require('nvim-treesitter.configs').setup({
     },
   },
 })
-
-
-vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
-vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
 
 
 -- Terminal, behave like in Vim!

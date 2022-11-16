@@ -1,5 +1,4 @@
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
-local opt = vim.opt  -- to set options
 
 -- Install packer
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -39,54 +38,45 @@ packer.startup(function()
   use 'Olical/conjure' -- Clojure REPL
 end)
 
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
-opt.swapfile = false
-opt.emoji = false
-opt.splitbelow = true
-opt.splitright = true
-opt.signcolumn = 'number'
-opt.wrap = false
+vim.opt.swapfile = false
+vim.opt.emoji = false
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.signcolumn = 'number'
 
---Incremental live completion
-opt.inccommand = 'nosplit'
+-- Set highlight on search
+vim.opt.hlsearch = false
 
---Set highlight on search
-opt.hlsearch = false
-
---Make line numbers default
+-- Make line numbers default
 vim.wo.number = true
 
---Do not save when switching buffers
-opt.hidden = true
+-- Enable break indent
+vim.opt.breakindent = true
 
---Enable mouse mode
-opt.mouse = 'a'
+-- Save undo history
+vim.opt.undofile = true
 
---Enable break indent
-opt.breakindent = true
+-- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
---Save undo history
-opt.undofile = true
+-- Decrease update time
+vim.opt.updatetime = 250
+-- Set completevim.opt to have a better completion experience
+vim.opt.completeopt = 'menuone,noinsert'
 
---Case insensitive searching UNLESS /C or capital in search
-opt.ignorecase = true
-opt.smartcase = true
-
---Decrease update time
-opt.updatetime = 250
-
---Set colorscheme (order is important here)
-opt.termguicolors = true
+-- Set colorscheme (order is important here)
 vim.cmd([[
     set termguicolors
     colorscheme falcon
     highlight Normal guibg=#020221
 ]])
 
---Remap space as leader key
+-- Remap space as leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -105,7 +95,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- keymaps
 local function on_attach(client, bufnr)
-  -- Mappings.
   local opns = { silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -231,8 +220,6 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
--- Set completeopt to have a better completion experience
-opt.completeopt = 'menuone,noinsert'
 
 vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
 vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')

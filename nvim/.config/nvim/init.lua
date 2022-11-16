@@ -135,9 +135,7 @@ local cmp = require('cmp')
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body) -- For `vsnip` users.
-    end,
+    expand = function(args) end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -250,11 +248,3 @@ vim.cmd([[
     autocmd TermClose * call feedkeys("i")
   augroup end
 ]])
-
-vim.cmd([[
-  augroup ConjureRemoveSponsor
-    autocmd!
-    autocmd BufWinEnter "conjure-log-*" "silent s/Sponsored//e"
-  augroup end
-]])
-

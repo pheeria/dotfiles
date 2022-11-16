@@ -1,5 +1,4 @@
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
-local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
 
 -- Install packer
@@ -88,8 +87,8 @@ vim.cmd([[
 ]])
 
 --Remap space as leader key
-g.mapleader = ' '
-g.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 
 -- Telescope
@@ -168,19 +167,18 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
-lspconfig.clojure_lsp.setup{
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+local lsp_clients = {'clojure_lsp', 'pyright'}
+for _, client in pairs(lsp_clients) do
+    lspconfig[client].setup({
+        on_attach = on_attach,
+        capabilities = capabilities
+    })
+end
 
-lspconfig.pyright.setup{
-    on_attach = on_attach,
-    capabilities = capabilities
-}
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true, -- false will disable the whole extension
   },
@@ -231,7 +229,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Set completeopt to have a better completion experience
 opt.completeopt = 'menuone,noinsert'

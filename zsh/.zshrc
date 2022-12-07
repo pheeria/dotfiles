@@ -1,4 +1,4 @@
-export ZSH="/Users/o.askar/.oh-my-zsh"
+export ZSH="/Users/olzhas/.oh-my-zsh"
 
 ZSH_THEME="spock"
 HYPHEN_INSENSITIVE="true"

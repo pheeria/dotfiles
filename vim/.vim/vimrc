@@ -145,8 +145,7 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 " Test
 nnoremap <leader>t :w<CR> :TestFile<CR>
 let test#strategy = 'vimterminal'
-let test#java#runner = 'gradletest'
-let test#scala#runner = 'sbttest'
+let test#python#runner = 'pytest'
 let g:test#javascript#runner = 'jest'
 
 " CONQUER OF COMPLETION
@@ -372,10 +371,3 @@ augroup END
 
 set statusline=%!SpocklineActive()
 
-
-let g:codi#interpreters = {
-   \ 'python': {
-       \ 'bin': 'python3',
-       \ 'prompt': '^\(>>>\|\.\.\.\) ',
-       \ },
-   \ }

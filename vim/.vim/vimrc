@@ -154,7 +154,6 @@ let g:test#javascript#runner = 'jest'
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-json',
-  \ 'coc-java',
   \ 'coc-go',
   \ 'coc-pyright',
   \ 'coc-eslint',

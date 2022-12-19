@@ -16,7 +16,6 @@ bindkey "^X^X" edit-command-line
 export MANPAGER="vim -M +MANPAGER -"
 
 # DO NOT TRACK
-export PATH=$PATH:/opt/homebrew/bin:/Users/o.askar/Library/Python/3.8/bin
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_INSTALL_HINTS=1
@@ -55,7 +54,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 
+export PATH="/Users/olzhas/.local/bin:/opt/homebrew/bin:$PATH"
+
 # Je ne veux pas travailler
 [ -f ~/.workrc ] && source ~/.workrc
-export GENSIM_DATA_DIR=~/.personal/gensim
-if [ -f ~/.kube/aliases-staging ]; then source ~/.kube/aliases-staging; fi

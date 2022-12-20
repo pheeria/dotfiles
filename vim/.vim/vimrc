@@ -257,12 +257,7 @@ function! CheckBackspace() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has("nvim")
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
+inoremap <silent><expr> <c-@> coc#refresh()
 " Remap keys for applying codeAction to the current buffer.
 nmap <silent><leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.

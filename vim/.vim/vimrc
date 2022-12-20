@@ -119,7 +119,6 @@ function! s:detect() abort
     endif
 
     let package_name = substitute(package_name, "-", "", "")
-    echomsg package_name
 
     if isdirectory(expand(root . "/tests"))
       let test_dir = "tests"
@@ -130,6 +129,9 @@ function! s:detect() abort
             \ "*": { "path": test_dir . "/**" },
             \ test_dir . "/**/test_*.py": {
             \   "type": "test",
+            \   "alternate": [
+            \     package_name . "/{dirname}/{basename}.py"
+            \   ],
             \ }})
     endif
 

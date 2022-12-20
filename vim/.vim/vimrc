@@ -102,6 +102,57 @@ augroup Commentary
 augroup END
 
 
+" PROJECTIONIST
+" ---- --
+let g:projectionist_heuristics = {
+      \ 'requirements.txt|pyproject.toml': {
+      \   '*': { 'python_package': 1 }
+      \ }}
+
+function! s:detect() abort
+  for [root, value] in projectionist#query('python_package')
+    " Support worktrees
+    if isdirectory(expand(root . "/.git"))
+      let package_name = fnamemodify(root, ':t') 
+    else
+      let package_name = fnamemodify(fnamemodify(root, ':h'), ':t') 
+    endif
+
+    let package_name = substitute(package_name, "-", "", "")
+    echomsg package_name
+
+    if isdirectory(expand(root . '/tests'))
+      let test_dir = 'tests'
+    endif
+
+    if exists('l:test_dir')
+      call projectionist#append(root, {
+            \ '*': { 'path': test_dir . '/**' },
+            \ test_dir . '/**/test_*.py': {
+            \   'type': 'test',
+            \ }})
+    endif
+
+    if isdirectory(expand(root . '/' . package_name))
+      let src_dir = package_name
+    endif
+
+    if exists('l:src_dir')
+      call projectionist#append(root, {
+            \ '*': { 'path': src_dir . '/**' },
+            \ src_dir . '/*.py': {
+            \   'type': 'src',
+            \   'alternate': [
+            \     'tests/{dirname}/test_{basename}.py'
+            \   ],
+            \ }})
+    endif
+  endfor
+endfunction
+
+autocmd User ProjectionistDetect call s:detect()
+
+
 " FZF / Ripgrep
 " ---- --
 set runtimepath+=/opt/homebrew/opt/fzf

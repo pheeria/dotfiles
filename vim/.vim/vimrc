@@ -84,7 +84,8 @@ let g:fugitive_pty = 0
 " VINEGAR
 " ---- --
 " Vinegar, don't show dotfiles on start. Toggle with 'gh'
-let g:netrw_list_hide = "\(^\|\s\s\)\zs\.\S\+"
+set wildignore=__pycache__/,*.pyc,.DS_Store
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Allow to move files to another (say, parent) directory
 let g:netrw_keepdir = 0
 

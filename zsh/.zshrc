@@ -20,6 +20,9 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_INSTALL_HINTS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
+export DYLD_LIBRARY_PATH=/opt/homebrew/lib
+export LIBRARY_PATH=/opt/homebrew/lib
+export C_INCLUDE_PATH=/opt/homebrew/include
 
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
@@ -48,7 +51,12 @@ export GOBIN=$GOPATH/bin
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export PATH="/Users/olzhas/.local/bin:/opt/homebrew/bin:$PATH"
+# Where to find executables
+export PATH="/Users/olzhas/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# Python development, it couldn't function without pyenv :(
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
 
 # Je ne veux pas travailler
 [ -f ~/.workrc ] && source ~/.workrc

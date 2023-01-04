@@ -368,6 +368,10 @@
 	<true/>
 	<key>MinimalTabStyleBackgroundColorDifference</key>
 	<real>0.20000000298023224</real>
+	<key>NeverWarnAboutShortLivedSessions_2F3A3FF0-7684-494B-8D1B-D6418B4B34FB</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_2F3A3FF0-7684-494B-8D1B-D6418B4B34FB_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1177,7 +1181,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1354,7 +1358,7 @@
 			<key>Transparency</key>
 			<real>0.11353505710659899</real>
 			<key>Unlimited Scrollback</key>
-			<false/>
+			<true/>
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
@@ -2105,7 +2109,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -2274,7 +2278,7 @@
 			<key>Transparency</key>
 			<real>0.11353505710659899</real>
 			<key>Unlimited Scrollback</key>
-			<false/>
+			<true/>
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
@@ -2334,6 +2338,10 @@
 	</dict>
 	<key>Print In Black And White</key>
 	<true/>
+	<key>QuickPasteBytesPerCall</key>
+	<integer>1024</integer>
+	<key>QuickPasteDelayBetweenCalls</key>
+	<real>0.079999998211860657</real>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>StatusBarPosition</key>

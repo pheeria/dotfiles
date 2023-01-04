@@ -9,9 +9,15 @@
 4. `fn + i` for iTerm2 and `fn + t` for Telegram
 
 ## Set System Preferences
+### Mission Control
+1. Uncheck `Automatically rearrange Spaces based on most recent use`
+2. Disable Hot Corners
+3. Unset `Show Desktop` shortcut for F11 to work with VSCode
+
 ### Keyboard
 1. Remap CapsLock to Escape `System Preferences -> Keyboard -> Modifier Keys`
 2. Set `Input Sources` to `Kazakh` and `ABC - Extended`
+3. In `Keyboard -> Text` turn off `Use smart quotes and dashes` and set the values to normal out of superstition
 
 ### Monitor
 1. Turn OFF `Font smoothing` in `System Preferences -> General`
@@ -31,10 +37,11 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 ## iTerm
 1. Go to `General -> Preferences -> Load Preferences from a custom folder`
 2. Point to `dotfiles/iTerm`
+3. In `Profiles -> Terminal` turn on `Unlimited Scrollback`
 
 ## Brew
 
-1. Use `brew bundle dump` to create a dumpfile with all of the currently installed brew packages
+1. Use `brew bundle dump` to create a dumpfile with all of the currently installed brew packages (add `--force` if the file exists)
 2. Use `brew bundle` to install all of the packages in the `Brewfile`
 3. [Tips & Tricks](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 

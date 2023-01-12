@@ -6,13 +6,17 @@ export UPDATE_ZSH_DAYS=13
 
 plugins=(git z)
 
+# Dump my completions to your cache
+# export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
 
+# Edit in Vim, instead of the terminal
+# https://youtu.be/mz9LBUteKNo
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^X" edit-command-line
 
-# use Vim as pager for man
+# Use Vim as pager for man
 export MANPAGER="vim -M +MANPAGER -"
 
 # DO NOT TRACK

@@ -1,9 +1,12 @@
 [core]
 	excludesfile = ~/.config/git/ignore
 [user]
-	name = pheeria
-	email = olzhas.askar@deliveryhero.com
+	name = Olzhas Askar
+	email = olzhas.askar@gmail.com
 [pull]
 	ff = only
 [init]
 	defaultBranch = main
+
+[includeIf "gitdir:~/.code/"]
+    path = ~/.config/git/work

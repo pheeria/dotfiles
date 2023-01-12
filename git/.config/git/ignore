@@ -29,3 +29,7 @@ rest.sh
 
 # Custom shell scripts per directory
 .custom.sh
+
+# Work related
+git/.config/git/work
+

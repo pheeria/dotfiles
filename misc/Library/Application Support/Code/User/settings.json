@@ -1,0 +1,13 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "extensions.ignoreRecommendations": true,
+    "editor.minimap.enabled": false,
+    "security.workspace.trust.enabled": false,
+    "editor.accessibilitySupport": "off",
+    "workbench.layoutControl.enabled": false,
+    "workbench.startupEditor": "none",
+    "python.experiments.enabled": false,
+    "python.venvPath": "/Users/olzhas/Library/Caches/pypoetry/virtualenvs",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "debug.terminal.clearBeforeReusing": true
+}

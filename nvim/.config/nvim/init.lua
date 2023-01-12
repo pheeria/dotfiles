@@ -155,6 +155,7 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true, -- false will disable the whole extension
   },
+  ensure_installed = { "clojure", "python" },
   incremental_selection = {
     enable = true,
     keymaps = {

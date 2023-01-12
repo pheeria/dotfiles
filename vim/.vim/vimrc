@@ -200,7 +200,8 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 
 
 " TEST
-nnoremap <leader>t :w<CR> :TestFile<CR>
+nnoremap <leader>t :w<CR> :TestNearest<CR>
+nnoremap <leader>T :w<CR> :TestFile<CR>
 let test#strategy = "vimterminal"
 let test#python#runner = "pytest"
 let g:test#javascript#runner = "jest"

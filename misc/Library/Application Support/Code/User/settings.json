@@ -9,5 +9,8 @@
     "python.experiments.enabled": false,
     "python.venvPath": "/Users/olzhas/Library/Caches/pypoetry/virtualenvs",
     "python.terminal.activateEnvInCurrentTerminal": true,
-    "debug.terminal.clearBeforeReusing": true
+    "debug.terminal.clearBeforeReusing": true,
+    "notebook.output.textLineLimit": 50,
+    "jupyter.experiments.enabled": false,
+    "git.enableSmartCommit": true,
 }

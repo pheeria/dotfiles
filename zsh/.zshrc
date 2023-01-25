@@ -51,6 +51,15 @@ chpwd() {
   fi
 }
 
+# Merge latest changes to the current branch
+glatest() {
+  keep_branch=$(git_current_branch)
+  git checkout $(git_main_branch)
+  git pull -p
+  git checkout $keep_branch
+  git merge $(git_main_branch)
+}
+
 # If I'll ever write in Go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin

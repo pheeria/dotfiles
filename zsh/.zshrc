@@ -64,6 +64,12 @@ glatest() {
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
+# Node stuff, slow af
+export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
+
 # Fuzzy Finder written in Go
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"

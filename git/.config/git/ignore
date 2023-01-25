@@ -23,6 +23,7 @@ metals.sbt
 
 # Ripgrep
 .rgignore
+.ignore
 
 # Httpie
 rest.sh

@@ -60,10 +60,6 @@ glatest() {
   git merge $(git_main_branch)
 }
 
-# If I'll ever write in Go
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-
 # Node stuff, slow af
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

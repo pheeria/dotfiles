@@ -1,4 +1,9 @@
-export ZSH="/Users/olzhas/.oh-my-zsh"
+# X Development Group
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+
+export ZSH="$XDG_CONFIG_HOME/zsh"
 
 ZSH_THEME="spock"
 HYPHEN_INSENSITIVE="true"
@@ -19,10 +24,6 @@ bindkey "^X^X" edit-command-line
 # Use Vim as pager for man
 export MANPAGER="vim -M +MANPAGER -"
 
-# X Development Group
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_STATE_HOME=$HOME/.local/state
 
 # DO NOT TRACK
 export HOMEBREW_NO_ANALYTICS=1

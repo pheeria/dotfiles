@@ -5,7 +5,6 @@ export XDG_STATE_HOME=$HOME/.local/state
 
 export ZSH="$XDG_CONFIG_HOME/zsh"
 
-ZSH_THEME="spock"
 HYPHEN_INSENSITIVE="true"
 export UPDATE_ZSH_DAYS=13
 
@@ -14,6 +13,7 @@ plugins=(git z)
 # Dump my completions to your cache
 # export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
+source $ZSH/spock.zsh
 
 # Edit in Vim, instead of the terminal
 # https://youtu.be/mz9LBUteKNo

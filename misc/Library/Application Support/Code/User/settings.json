@@ -13,4 +13,5 @@
     "notebook.output.textLineLimit": 50,
     "jupyter.experiments.enabled": false,
     "git.enableSmartCommit": true,
+    "git.confirmSync": false,
 }

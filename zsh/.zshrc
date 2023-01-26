@@ -4,16 +4,16 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_STATE_HOME=$HOME/.local/state
 
 export ZSH="$XDG_CONFIG_HOME/zsh"
-
-HYPHEN_INSENSITIVE="true"
-export UPDATE_ZSH_DAYS=13
-
-plugins=(git z)
-
 # Dump my completions to your cache
-# export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+export ZSH_COMPDUMP=$ZSH/.zcompdump-${ZSH_VERSION}
+plugins=(z)
 source $ZSH/oh-my-zsh.sh
 source $ZSH/spock.zsh
+
+## History file configuration
+HISTFILE="$XDG_CONFIG_HOME/zsh/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
 
 # Edit in Vim, instead of the terminal
 # https://youtu.be/mz9LBUteKNo
@@ -66,7 +66,6 @@ export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 
 # Fuzzy Finder written in Go
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 

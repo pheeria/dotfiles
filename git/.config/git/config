@@ -5,6 +5,8 @@
 	email = olzhas.askar@gmail.com
 [pull]
 	ff = only
+[push]
+	autoSetupRemote = true
 [init]
 	defaultBranch = main
 

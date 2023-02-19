@@ -28,6 +28,9 @@ metals.sbt
 # Httpie
 rest.sh
 
+# Mypy
+.dmypy.json
+
 # Custom shell scripts per directory
 .custom.sh
 

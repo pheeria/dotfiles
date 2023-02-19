@@ -7,7 +7,7 @@ export ZSH="$XDG_CONFIG_HOME/zsh"
 # Dump my completions to your cache
 export ZSH_COMPDUMP=$ZSH/.zcompdump-${ZSH_VERSION}
 plugins=(z)
-source $ZSH/oh-my-zsh.sh
+source $ZSH/miniomz.sh
 source $ZSH/spock.zsh
 
 ## History file configuration

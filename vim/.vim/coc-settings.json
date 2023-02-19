@@ -1,5 +1,6 @@
 {
   "eslint.autoFixOnSave": true,
+  "suggest.noselect": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",

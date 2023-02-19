@@ -190,5 +190,4 @@ function git_main_branch() {
   echo master
 }
 
-alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias gswm='git switch $(git_main_branch)'

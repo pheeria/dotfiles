@@ -64,7 +64,6 @@ brew "node"
 brew "newman"
 brew "nghttp2"
 brew "nginx"
-brew "nvm"
 brew "openjdk@11"
 brew "opensearch", restart_service: true
 brew "openssl@3"

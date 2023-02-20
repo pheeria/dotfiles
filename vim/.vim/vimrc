@@ -1,6 +1,3 @@
-set termguicolors
-colorscheme default
-
 " Nvim defaults
 " --------------
 set background=dark

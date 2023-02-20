@@ -1,17 +1,10 @@
-" Nvim defaults
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+" Defaults
 " --------------
 set background=dark
 
-" Backspace should be able to remove the text inserted before
-set backspace=indent,eol,start
-
-" Visual autocomplete for command menu
-set wildmenu
-" Display incomplete commands
-set showcmd
-
-" Search as characters are entered
-set incsearch
 " Always show the status line at the bottom, even if you only have one window open
 set laststatus=2
 " Disable audible bell because it's annoying
@@ -31,17 +24,12 @@ set noemoji
 set nowrap
 " search is case-insensitive, until a capital letter is added
 set ignorecase smartcase
-set scrolloff=8
 
 set lazyredraw
 " Delete comment character when joining commented lines
 set formatoptions+=j
 
 set splitright splitbelow
-" Allow scrolling, resizing and clicking with mouse
-set mouse=a
-
-set timeout timeoutlen=3000 ttimeoutlen=100
 
 " Allow local .vimrc per directory
 set exrc
@@ -55,11 +43,6 @@ let mapleader = " "
 nnoremap <leader>qq :bd<CR>
 nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
 nnoremap <leader>zc :vs ~/.zshrc<CR>
-
-augroup RC
-    autocmd!
-    autocmd BufWritePost vimrc source %
-augroup END
 
 
 " UNDOTREE

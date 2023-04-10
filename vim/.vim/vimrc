@@ -4,6 +4,7 @@ source $VIMRUNTIME/defaults.vim
 " Defaults
 " --------------
 set background=dark
+set termguicolors
 
 " Always show the status line at the bottom, even if you only have one window open
 set laststatus=2
@@ -128,6 +129,7 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 
 
 " TEST
+" ---- --
 nnoremap <leader>t :w<CR> :TestNearest<CR>
 nnoremap <leader>T :w<CR> :TestFile<CR>
 let test#strategy = "vimterminal"

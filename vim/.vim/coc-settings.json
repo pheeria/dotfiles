@@ -1,4 +1,5 @@
 {
+  "inlayHint.enable": false,
   "eslint.autoFixOnSave": true,
   "suggest.noselect": true,
   "coc.preferences.formatOnSaveFiletypes": [

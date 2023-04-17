@@ -3,6 +3,8 @@
 [user]
 	name = Olzhas Askar
 	email = olzhas.askar@gmail.com
+[fetch]
+	prune = true
 [pull]
 	ff = only
 [push]

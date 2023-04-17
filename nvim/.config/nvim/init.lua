@@ -22,6 +22,8 @@ packer.startup(function()
   use('tpope/vim-vinegar') -- File explorer
   use('tpope/vim-surround') -- Surround objects
   use('tpope/vim-repeat') -- Repeat surround
+  use('tpope/vim-sexp-mappings-for-regular-people') -- Tpope sexp
+  use('guns/vim-sexp') -- Sexp
   use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }) -- UI to select things (files, grep results, open buffers...)
   use('nvim-treesitter/nvim-treesitter') -- Highlight, edit, and navigate code using a fast incremental parsing library
   use('nvim-treesitter/nvim-treesitter-textobjects') -- Additional textobjects for treesitter
@@ -31,6 +33,7 @@ packer.startup(function()
   use('PaterJason/cmp-conjure') -- Conjure Autocompletion
   use('fenetikm/falcon') -- Colorscheme
   use('Olical/conjure') -- Clojure REPL
+  use('github/copilot.vim') -- Copilot
 end)
 
 vim.opt.tabstop = 4
@@ -47,6 +50,7 @@ vim.opt.hlsearch = false -- Set highlight on search
 vim.wo.number = true -- Make line numbers default
 vim.opt.breakindent = true -- Enable break indent
 vim.opt.undofile = true -- Save undo history
+vim.opt.exrc = true
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.completeopt = 'menuone,noinsert' -- Have a better completion experience
 
@@ -67,6 +71,20 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
 vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
+
+-- Vinegar
+vim.opt.wildignore = '__pycache__/,*.pyc,.DS_Store'
+
+-- Allow to move files to another (say, parent) directory
+vim.cmd([[
+    let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+    let g:netrw_keepdir = 0
+
+    augroup Netrw
+        autocmd!
+        autocmd FileType netrw setlocal bufhidden=wipe
+    augroup END
+]])
 
 -- Telescope
 local telescope = require('telescope.builtin')
@@ -155,7 +173,7 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true, -- false will disable the whole extension
   },
-  ensure_installed = { "clojure", "python" },
+  ensure_installed = { "clojure", "python", "lua" },
   incremental_selection = {
     enable = true,
     keymaps = {

@@ -16,4 +16,9 @@
     "git.confirmSync": false,
     "jupyter.askForKernelRestart": false,
     "workbench.statusBar.visible": false,
+    "git.openRepositoryInParentFolders": "never",
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.showWelcomeOnInstall": false,
+    "typescript.surveys.enabled": false,
+    "gitlens.telemetry.enabled": false,
 }

@@ -70,11 +70,12 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Where to find executables
-export PATH="$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 # Python development, it couldn't function without pyenv :(
 export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
+export PYTHONDONTWRITEBYTECODE=1
 
 # Je ne veux pas travailler
 [ -f ~/.workrc ] && source ~/.workrc

@@ -22,6 +22,7 @@ packer.startup(function()
   use('tpope/vim-vinegar') -- File explorer
   use('tpope/vim-surround') -- Surround objects
   use('tpope/vim-repeat') -- Repeat surround
+  use('tpope/vim-sleuth') -- Sleuth
   use('tpope/vim-sexp-mappings-for-regular-people') -- Tpope sexp
   use('guns/vim-sexp') -- Sexp
   use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }) -- UI to select things (files, grep results, open buffers...)
@@ -85,6 +86,9 @@ vim.cmd([[
         autocmd FileType netrw setlocal bufhidden=wipe
     augroup END
 ]])
+
+-- Sexp
+vim.g.sexp_enable_insert_mode_mappings = 0
 
 -- Telescope
 local telescope = require('telescope.builtin')

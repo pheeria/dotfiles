@@ -97,8 +97,8 @@ nnoremap \ :Rg<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   "rg --column --line-number --hidden --ignore-case --no-heading --color=always ".shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({"options": "--delimiter : --nth 4.."}, "up:60%")
-  \           : fzf#vim#with_preview({"options": "--delimiter : --nth 4.."}, "right:50%", "?"),
+  \   <bang>0 ? fzf#vim#with_preview({"dir": systemlist("git rev-parse --show-toplevel")[0], "options": "--delimiter : --nth 4.."}, "up:60%")
+  \           : fzf#vim#with_preview({"dir": systemlist("git rev-parse --show-toplevel")[0], "options": "--delimiter : --nth 4.."}, "right:50%", "?"),
   \   <bang>0)
 
 " Customize fzf colors to match your color scheme
@@ -130,8 +130,8 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 
 " TEST
 " ---- --
-nnoremap <leader>t :w<CR> :TestNearest<CR>
-nnoremap <leader>T :w<CR> :TestFile<CR>
+nnoremap <leader>t :wa<CR> :TestNearest<CR>
+nnoremap <leader>T :wa<CR> :TestFile<CR>
 let test#strategy = "vimterminal"
 let test#python#runner = "pytest"
 let g:test#javascript#runner = "jest"
@@ -219,11 +219,13 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent>gd <Plug>(coc-definition)
+nmap <silent>gd <Plug>(coc-definition) zt
 nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr <Plug>(coc-references)
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+" Search workspace symbols
+nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
 
 nmap <expr> <silent> <leader>sd <SID>select_current_word()
 function! s:select_current_word()
@@ -256,6 +258,15 @@ set noshowmode
 filetype plugin indent on
 syntax enable
 highlight Normal guibg=NONE ctermbg=NONE
+
+" Python Syntax
+" g:python_highlight_builtins
+let g:python_highlight_string_formatting=1
+let g:python_highlight_string_format=1
+let g:python_highlight_string_templates=1
+let g:python_highlight_indent_errors=1
+let g:python_highlight_space_errors=1
+let g:python_highlight_class_vars=1
 
 
 " MacOS Yank

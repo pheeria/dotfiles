@@ -26,6 +26,7 @@
   "java.trace.server": "verbose",
   "java.jdt.ls.vmargs": "-javaagent:/Users/o.askar/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar",
   "metals.enable": false,
+  "list.source.diagnostics.pathFormat": "short",
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",

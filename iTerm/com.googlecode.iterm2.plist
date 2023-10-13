@@ -730,6 +730,8 @@
 			<string>1CCC83C2-9354-4452-B7A1-F7FDF09CC25F</string>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
+			<key>Icon</key>
+			<integer>0</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Use Transparency</key>

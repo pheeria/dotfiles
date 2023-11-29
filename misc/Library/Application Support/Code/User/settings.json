@@ -21,4 +21,6 @@
     "gitlens.showWelcomeOnInstall": false,
     "typescript.surveys.enabled": false,
     "gitlens.telemetry.enabled": false,
+    "update.showReleaseNotes": false,
+    "window.commandCenter": false,
 }

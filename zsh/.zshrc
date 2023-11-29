@@ -30,9 +30,6 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_INSTALL_HINTS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
-export DYLD_LIBRARY_PATH=/opt/homebrew/lib
-export LIBRARY_PATH=/opt/homebrew/lib
-export C_INCLUDE_PATH=/opt/homebrew/include
 
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"

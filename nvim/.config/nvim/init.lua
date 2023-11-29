@@ -5,13 +5,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.cmd([[
-  augroup Packer
-    autocmd!
-    autocmd BufWritePost init.lua PackerCompile
-  augroup end
-]])
-
 local packer = require('packer')
 local use = packer.use
 packer.startup(function()
@@ -31,10 +24,9 @@ packer.startup(function()
   use('neovim/nvim-lspconfig') -- Collection of configurations for built-in LSP client
   use('hrsh7th/cmp-nvim-lsp') -- Default capabilities (?!)
   use('hrsh7th/nvim-cmp') -- Autocompletion
-  use('PaterJason/cmp-conjure') -- Conjure Autocompletion
   use('fenetikm/falcon') -- Colorscheme
   use('Olical/conjure') -- Clojure REPL
-  use('github/copilot.vim') -- Copilot
+  use('PaterJason/cmp-conjure') -- Conjure Autocompletion
 end)
 
 vim.opt.tabstop = 4

@@ -148,7 +148,7 @@ cmp.setup({
     end, { 'i', 's' }),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp', keyword_length = 3 },
     { name = 'conjure' },
   })
 })
@@ -169,7 +169,7 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true, -- false will disable the whole extension
   },
-  ensure_installed = { "clojure", "python", "lua" },
+  ensure_installed = { "clojure", "python" },
   incremental_selection = {
     enable = true,
     keymaps = {

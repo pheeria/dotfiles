@@ -71,7 +71,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', '<leader>vc', ':vs ~/.config/nvim/init.lua<cr>')
-vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>')
+vim.keymap.set('n', '<leader>nt', ':tabnew<CR>:terminal<CR>i')
 
 -- Vinegar
 vim.opt.wildignore = '__pycache__/,*.pyc,.DS_Store'
@@ -226,13 +226,3 @@ require('nvim-treesitter.configs').setup({
     },
   },
 })
-
-
--- Terminal, behave like in Vim!
-vim.cmd([[
-  augroup Terminal
-    autocmd!
-    autocmd TermOpen * call feedkeys("i")
-    autocmd TermClose * call feedkeys("i")
-  augroup end
-]])

@@ -66,6 +66,10 @@ alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# Don't spy on me, Google
+export GOPROXY=direct
+export GOSUMDB=off
+
 # Where to find executables
 export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$PATH"
 

@@ -25,8 +25,7 @@ bindkey "^X^X" edit-command-line
 export MANPAGER="vim -M +MANPAGER -"
 
 
-# DO NOT TRACK
-export HOMEBREW_NO_ANALYTICS=1
+# Homebrew
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_INSTALL_HINTS=1
 export HOMEBREW_INSTALL_BADGE="🧉"
@@ -66,9 +65,15 @@ alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# DO NOT TRACK
+export HOMEBREW_NO_ANALYTICS=1
 # Don't spy on me, Google
 export GOPROXY=direct
 export GOSUMDB=off
+# Don't spy on me, Microsoft
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+# Don't spy, pretty please
+export DO_NOT_TRACK=1
 
 # Where to find executables
 export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$PATH"

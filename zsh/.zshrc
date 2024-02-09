@@ -61,6 +61,8 @@ glatest() {
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 # Core-JS ads
+# npm set fund false
+# npm set audit false
 export ADBLOCK=1
 export DISABLE_OPENCOLLECTIVE=1
 

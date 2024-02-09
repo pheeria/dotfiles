@@ -60,6 +60,9 @@ glatest() {
 # Node stuff, slow af
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
+# Core-JS ads
+export ADBLOCK=1
+export DISABLE_OPENCOLLECTIVE=1
 
 # Fuzzy Finder written in Go
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs"

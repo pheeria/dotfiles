@@ -166,7 +166,6 @@ let g:coc_global_extensions = [
   \ "coc-vetur",
   \ "coc-css"
   \ ]
-let g:coc_node_path = "/opt/homebrew/bin/node"
 " TextEdit might fail if hidden is not set.
 set hidden
 

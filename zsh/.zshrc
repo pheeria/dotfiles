@@ -57,9 +57,6 @@ glatest() {
   git merge $(git_main_branch)
 }
 
-# Node stuff, slow af
-export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 # Core-JS ads
 # npm set fund false
 # npm set audit false
@@ -81,7 +78,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DO_NOT_TRACK=1
 
 # Where to find executables
-export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$HOME/.local/share/mise/shims:$PATH"
 
 # Python development, it couldn't function without pyenv :(
 export PYENV_ROOT="$HOME/.pyenv"

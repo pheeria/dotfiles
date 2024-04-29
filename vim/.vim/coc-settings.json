@@ -1,19 +1,12 @@
 {
   "inlayHint.enable": false,
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "suggest.noselect": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "vue"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": [],
   "javascript.suggestionActions.enabled": false,
   "typescript.suggestionActions.enabled": false,
-  "typescript.format.enabled": true,
-  "typescript.format.semicolons": "insert",
+  "typescript.format.enabled": false,
+  "typescript.format.semicolons": "ignore",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "prettier.semi": true,

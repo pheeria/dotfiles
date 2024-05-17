@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # X Development Group
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
@@ -11,7 +12,7 @@ source $ZSH/miniomz.sh
 source $ZSH/spock.zsh
 
 ## History file configuration
-HISTFILE="$XDG_CONFIG_HOME/zsh/.zsh_history"
+HISTFILE="$ZSH/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=10000
 
@@ -23,7 +24,6 @@ bindkey "^X^X" edit-command-line
 
 # Use Vim as pager for man
 export MANPAGER="vim -M +MANPAGER -"
-
 
 # Homebrew
 export HOMEBREW_NO_ENV_HINTS=1
@@ -78,12 +78,11 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DO_NOT_TRACK=1
 
 # Where to find executables
-export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@11/bin:$HOME/.local/share/mise/shims:$PATH"
+export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.local/share/mise/shims:$PATH"
 
-# Python development, it couldn't function without pyenv :(
-export PYENV_ROOT="$HOME/.pyenv"
-eval "$(pyenv init -)"
+# Python 
 export PYTHONDONTWRITEBYTECODE=1
 
 # Je ne veux pas travailler
-[ -f ~/.workrc ] && source ~/.workrc
+# [ -f ~/.workrc ] && source ~/.workrc
+zprof > ~/.profiled

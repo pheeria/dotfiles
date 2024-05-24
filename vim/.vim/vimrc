@@ -4,8 +4,11 @@ source $VIMRUNTIME/defaults.vim
 " Defaults
 " --------------
 set background=dark
-set termguicolors
-colorscheme rosepine_moon
+
+if $TERM_PROGRAM !=? "Apple_Terminal"
+    set termguicolors
+    colorscheme rosepine_moon
+endif
 
 " Always show the status line at the bottom, even if you only have one window open
 set laststatus=2

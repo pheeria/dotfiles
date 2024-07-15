@@ -18,6 +18,7 @@ setup:
 	brew bundle
 
 stow:
+	stow wezterm
 	stow git
 	stow zsh
 	stow vim

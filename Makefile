@@ -36,6 +36,7 @@ vim:
 	$(github)/arcticicestudio/nord-vim.git $(themes)/nord
 	$(github)/embark-theme/vim.git $(themes)/embark
 	$(github)/morhetz/gruvbox.git $(themes)/gruvbox
+	$(github)/rose-pine/vim.git $(themes)/rose-pine
 
 	$(github)/tpope/vim-commentary.git $(tpope)/commentary
 	$(github)/tpope/vim-fugitive.git $(tpope)/fugitive

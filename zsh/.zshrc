@@ -1,4 +1,4 @@
-zmodload zsh/zprof
+# zmodload zsh/zprof
 export EDITOR=vim
 # X Development Group
 export XDG_DATA_HOME=$HOME/.local/share
@@ -86,4 +86,5 @@ export PYTHONDONTWRITEBYTECODE=1
 
 # Je ne veux pas travailler
 # [ -f ~/.workrc ] && source ~/.workrc
-zprof > ~/.profiled
+# zprof > ~/.profiled
+

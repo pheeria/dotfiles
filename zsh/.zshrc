@@ -79,12 +79,13 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DO_NOT_TRACK=1
 
 # Where to find executables
-export PATH="/usr/local/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.local/share/mise/shims:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 
 # Python 
 export PYTHONDONTWRITEBYTECODE=1
 
 # Je ne veux pas travailler
-# [ -f ~/.workrc ] && source ~/.workrc
+[ -f ~/.workrc ] && source ~/.workrc
 # zprof > ~/.profiled
 

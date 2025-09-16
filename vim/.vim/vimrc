@@ -109,6 +109,7 @@ nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap \ :RG<CR>
 
+
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options
 let g:fzf_colors =
@@ -142,19 +143,7 @@ nnoremap <leader>t :wa<CR> :TestNearest<CR>
 nnoremap <leader>T :wa<CR> :TestFile<CR>
 let test#strategy = "vimterminal"
 let test#python#runner = "pytest"
-let g:test#javascript#runner = "jest"
 
-
-" Camel Case Motion
-" ---- --
-" map w <Plug>CamelCaseMotion_w
-" map b <Plug>CamelCaseMotion_b
-" map e <Plug>CamelCaseMotion_e
-" sunmap w
-" sunmap b
-" sunmap e
-" nmap cw ce
-" imap <C-w> <Plug>CamelCaseMotion_DeletePrevious
 
 
 " CONQUER OF COMPLETION

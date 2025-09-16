@@ -155,11 +155,14 @@ let g:coc_global_extensions = [
   \ "coc-go",
   \ "coc-pyright",
   \ "coc-eslint",
-  \ "coc-vetur",
   \ "coc-css"
   \ ]
 " TextEdit might fail if hidden is not set.
 set hidden
+
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
 
 " Some servers have issues with backup files
 set nobackup nowritebackup

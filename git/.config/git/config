@@ -12,5 +12,5 @@
 [init]
 	defaultBranch = main
 
-[includeIf "gitdir:~/.code/"]
+[includeIf "gitdir:~/Code/"]
     path = ~/.config/git/work

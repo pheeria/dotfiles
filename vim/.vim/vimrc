@@ -368,12 +368,3 @@ augroup END
 
 set statusline=%!SpocklineActive()
 
-
-" Copilot
-" ---- --
-imap <C-J> <Plug>(copilot-previous)
-imap <C-K> <Plug>(copilot-next)
-imap <C-L> <Plug>(copilot-accept-line)
-
-imap <silent><script><expr> <C-H> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true

@@ -55,7 +55,7 @@ glatest() {
   git checkout $(git_main_branch)
   git pull -p
   git checkout $keep_branch
-  git merge $(git_main_branch)
+  git merge --no-edit $(git_main_branch)
 }
 
 # Core-JS ads

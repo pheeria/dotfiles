@@ -109,6 +109,7 @@ nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap \ :RG<CR>
 
+
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options
 let g:fzf_colors =
@@ -154,11 +155,14 @@ let g:coc_global_extensions = [
   \ "coc-go",
   \ "coc-pyright",
   \ "coc-eslint",
-  \ "coc-vetur",
   \ "coc-css"
   \ ]
 " TextEdit might fail if hidden is not set.
 set hidden
+
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
 
 " Some servers have issues with backup files
 set nobackup nowritebackup
@@ -404,15 +408,5 @@ augroup Spockline
 augroup END
 
 set statusline=%!SpocklineActive()
-
-
-" Copilot
-" ---- --
-imap <C-J> <Plug>(copilot-previous)
-imap <C-K> <Plug>(copilot-next)
-imap <C-L> <Plug>(copilot-accept-line)
-
-imap <silent><script><expr> <C-H> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
 
 autocmd FileType json setlocal foldmethod=indent

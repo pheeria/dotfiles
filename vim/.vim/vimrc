@@ -69,14 +69,14 @@ let g:fugitive_pty = 0
 " VINEGAR
 " ---- --
 " Vinegar, don't show dotfiles on start. Toggle with 'gh'
-set wildignore=__pycache__/,*.pyc,.DS_Store
+set wildignore=__pycache__/,*.pyc,.DS_Store,*.aux,*.fdb_latexmk,*.4ct,*.aux,*.dvi,*.idv,*.lg,*.tmp,*.xref,*.fls,*.4tc,*.toc
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Allow to move files to another (say, parent) directory
 let g:netrw_keepdir = 0
 
 augroup Netrw
     autocmd!
-    autocmd FileType netrw setlocal bufhidden=wipe
+    autocmd FileType netrw setlocal bufhidden=hide
 augroup END
 
 
@@ -141,20 +141,8 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 nnoremap <leader>t :wa<CR> :TestNearest<CR>
 nnoremap <leader>T :wa<CR> :TestFile<CR>
 let test#strategy = "vimterminal"
-let test#python#runner = "pytest"
-let g:test#javascript#runner = "jest"
-
-
-" Camel Case Motion
-" ---- --
-" map w <Plug>CamelCaseMotion_w
-" map b <Plug>CamelCaseMotion_b
-" map e <Plug>CamelCaseMotion_e
-" sunmap w
-" sunmap b
-" sunmap e
-" nmap cw ce
-" imap <C-w> <Plug>CamelCaseMotion_DeletePrevious
+let test#python#runner = "unittest"
+let g:test#javascript#runner = "node"
 
 
 " CONQUER OF COMPLETION
@@ -230,6 +218,31 @@ nmap <silent>gd <Plug>(coc-definition) zt
 nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr <Plug>(coc-references)
+
+" Shorten quickfix paths to be relative to repo root
+function! ShortenQuickfixPaths()
+    let l:root = systemlist('git rev-parse --show-toplevel')[0]
+    if v:shell_error != 0
+        return
+    endif
+    let l:root = l:root . '/'
+    let l:items = getqflist()
+    for l:item in l:items
+        if l:item.bufnr > 0
+            let l:full = bufname(l:item.bufnr)
+            if l:full[:len(l:root)-1] ==# l:root
+                let l:item.filename = l:full[len(l:root):]
+                let l:item.bufnr = 0
+            endif
+        endif
+    endfor
+    call setqflist(l:items, 'r')
+endfunction
+
+augroup QuickfixRelativePaths
+    autocmd!
+    autocmd BufWinEnter quickfix call ShortenQuickfixPaths()
+augroup END
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 " Search workspace symbols
 nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
@@ -261,6 +274,15 @@ function! s:disable_coc_for_type()
 endfunction
 autocmd BufRead,BufNewFile * call s:disable_coc_for_type()
 
+augroup CocFix
+  autocmd!
+  autocmd BufEnter *
+        \ if &buftype != '' || &previewwindow |
+        \   let b:coc_enabled = 0 |
+        \ endif
+augroup END
+
+
 set noshowmode
 filetype plugin indent on
 syntax enable
@@ -281,10 +303,25 @@ function! Osc52YankOneLine()
   call Osc52Yank() | redraw!
 endfunction
 
-" Automatically call OSC52 function on yank to sync register with host clipboard
+function! SaveLastReg()
+    if v:event['regname']==""
+        if v:event['operator']=='y'
+            for i in range(8,1,-1)
+                exe "let @".string(i+1)." = @". string(i)
+            endfor
+            if exists("g:last_yank")
+                let @1=g:last_yank
+            endif
+            let g:last_yank=@"
+        endif
+    endif
+endfunction
+
 augroup Yank
   autocmd!
+  " Automatically call OSC52 function on yank to sync register with host clipboard
   autocmd TextYankPost * if v:event.operator ==# "y" | call Osc52Yank() | endif
+  autocmd TextYankPost * call SaveLastReg()
 augroup END
 
 " Statusline
@@ -377,3 +414,5 @@ imap <C-L> <Plug>(copilot-accept-line)
 
 imap <silent><script><expr> <C-H> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+autocmd FileType json setlocal foldmethod=indent

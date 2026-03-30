@@ -75,8 +75,11 @@ export GOPROXY=direct
 export GOSUMDB=off
 # Don't spy on me, Microsoft
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export AZURE_CORE_COLLECT_TELEMETRY=0
+export AZURE_CORE_SURVEY_MESSAGE=0
 # Don't spy, pretty please
 export DO_NOT_TRACK=1
+export NEXT_TELEMETRY_DISABLED=1
 
 # Where to find executables
 eval "$(/opt/homebrew/bin/brew shellenv)"

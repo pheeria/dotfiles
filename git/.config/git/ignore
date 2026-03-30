@@ -37,3 +37,7 @@ rest.sh
 # Work related
 git/.config/git/work
 
+# Dependency manager
+mise.toml
+
+**/.claude/settings.local.json

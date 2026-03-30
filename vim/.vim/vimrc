@@ -16,7 +16,7 @@ endif
 " Always show the status line at the bottom, even if you only have one window open
 set laststatus=2
 " Disable audible bell because it's annoying
-set noerrorbells visualbell t_vb= 	 
+set noerrorbells visualbell t_vb=
 
 " Read if a file was changed outside of Vim
 set autoread
@@ -56,6 +56,7 @@ augroup END
 
 " Allow local .vimrc per directory
 set exrc
+set secure
 
 " Different cursors for Insert and Normal modes
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -87,14 +88,14 @@ let g:fugitive_pty = 0
 " VINEGAR
 " ---- --
 " Vinegar, don't show dotfiles on start. Toggle with 'gh'
-set wildignore=__pycache__/,*.pyc,.DS_Store
+set wildignore=__pycache__/,*.pyc,.DS_Store,*.aux,*.fdb_latexmk,*.4ct,*.aux,*.dvi,*.idv,*.lg,*.tmp,*.xref,*.fls,*.4tc,*.toc
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Allow to move files to another (say, parent) directory
 let g:netrw_keepdir = 0
 
 augroup Netrw
     autocmd!
-    autocmd FileType netrw setlocal bufhidden=wipe
+    autocmd FileType netrw setlocal bufhidden=hide
 augroup END
 
 
@@ -169,8 +170,8 @@ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel
 nnoremap <leader>t :wa<CR> :TestNearest<CR>
 nnoremap <leader>T :wa<CR> :TestFile<CR>
 let test#strategy = "vimterminal"
-let test#python#runner = "pytest"
-
+let test#python#runner = "unittest"
+let g:test#javascript#runner = "node"
 
 
 " CONQUER OF COMPLETION
@@ -245,10 +246,35 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent>gd <Plug>(coc-definition) zt
+nmap <silent>gd <Plug>(coc-definition)
 nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr <Plug>(coc-references)
+
+" Shorten quickfix paths to be relative to repo root
+function! ShortenQuickfixPaths()
+    let l:root = systemlist('git rev-parse --show-toplevel')[0]
+    if v:shell_error != 0
+        return
+    endif
+    let l:root = l:root . '/'
+    let l:items = getqflist()
+    for l:item in l:items
+        if l:item.bufnr > 0
+            let l:full = bufname(l:item.bufnr)
+            if l:full[:len(l:root)-1] ==# l:root
+                let l:item.filename = l:full[len(l:root):]
+                let l:item.bufnr = 0
+            endif
+        endif
+    endfor
+    call setqflist(l:items, 'r')
+endfunction
+
+augroup QuickfixRelativePaths
+    autocmd!
+    autocmd BufWinEnter quickfix call ShortenQuickfixPaths()
+augroup END
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 " Search workspace symbols
 nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
@@ -274,24 +300,19 @@ omap ac <Plug>(coc-classobj-a)
 
 function! s:disable_coc_for_type()
     let l:filesuffix_blacklist = ["wiki", "md"]
-	if index(l:filesuffix_blacklist, expand("%:e")) != -1
-		let b:coc_enabled = 0
-	endif
+    if index(l:filesuffix_blacklist, expand("%:e")) != -1
+        let b:coc_enabled = 0
+    endif
 endfunction
-autocmd BufRead,BufNewFile * call s:disable_coc_for_type()
 
 " ---------------------------------------------------------------------
 " Prevent coc.nvim from attaching to/to run on non-file/plugin buffers
 " ---------------------------------------------------------------------
 augroup CocBufferFiltering
   autocmd!
-  " 1) If buffer has special buftype (nofile/terminal/quickfix/help) -> disable coc
-  autocmd BufReadPre,BufNewFile * if &buftype !=# '' |
-        \ let b:coc_enabled = 0 | let b:coc_suggest_disable = 1 |
-        \ endif
+  autocmd BufRead,BufNewFile * call s:disable_coc_for_type()
 
-  " 2) Explicitly disable for known plugin/file-name patterns (fugitive, fzf, netrw, NERDTree, undotree, etc.)
-  "    Adjust the list to taste (add/remove plugins you use).
+  " Explicitly disable for known plugin/file-name patterns (fugitive, fzf, netrw, NERDTree, undotree, etc.)
   autocmd BufReadPre,BufNewFile fugitive://*        let b:coc_enabled = 0 | let b:coc_suggest_disable = 1
   autocmd BufReadPre,BufNewFile *fzf*              let b:coc_enabled = 0 | let b:coc_suggest_disable = 1
   autocmd FileType fzf,fugitive,gitcommit,git,netrw,nerdtree,startify,undotree,help,qf
@@ -306,6 +327,14 @@ augroup CocBufEnterGuard
   autocmd!
   autocmd BufEnter * if exists('*coc#api#Buf_flush') && &buftype ==# '' && bufname('%') !=# '' && bufname('%') !~# '^fugitive://' |
         \ call coc#api#Buf_flush(expand('<abuf>')) |
+        \ endif
+augroup END
+
+augroup CocFix
+  autocmd!
+  autocmd BufEnter *
+        \ if &buftype != '' || &previewwindow |
+        \   let b:coc_enabled = 0 |
         \ endif
 augroup END
 
@@ -330,10 +359,25 @@ function! Osc52YankOneLine()
   call Osc52Yank() | redraw!
 endfunction
 
-" Automatically call OSC52 function on yank to sync register with host clipboard
+function! SaveLastReg()
+    if v:event['regname']==""
+        if v:event['operator']=='y'
+            for i in range(8,1,-1)
+                exe "let @".string(i+1)." = @". string(i)
+            endfor
+            if exists("g:last_yank")
+                let @1=g:last_yank
+            endif
+            let g:last_yank=@"
+        endif
+    endif
+endfunction
+
 augroup Yank
   autocmd!
+  " Automatically call OSC52 function on yank to sync register with host clipboard
   autocmd TextYankPost * if v:event.operator ==# "y" | call Osc52Yank() | endif
+  autocmd TextYankPost * call SaveLastReg()
 augroup END
 
 " Statusline
@@ -419,3 +463,7 @@ set statusline=%!SpocklineActive()
 
 let g:javascript_plugin_jsdoc = 1
 
+augroup JsonSettings
+    autocmd!
+    autocmd FileType json setlocal foldmethod=indent
+augroup END

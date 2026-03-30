@@ -1,6 +1,9 @@
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
+" packadd! editorconfig
+" let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 " Defaults
 " --------------
 set background=dark
@@ -35,6 +38,21 @@ set lazyredraw
 set formatoptions+=j
 
 set splitright splitbelow
+
+" Ripgrep
+set grepprg=rg\ --vimgrep
+function! Grep(...)
+    return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
+cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
+augroup quickfix
+    autocmd!
+    autocmd QuickFixCmdPost cgetexpr cwindow
+    autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
 
 " Allow local .vimrc per directory
 set exrc
@@ -109,6 +127,15 @@ nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap \ :RG<CR>
 
+
+" Searches for a keyword enclosed in single or double quotes, results in quickfix
+command! -nargs=1 KS call s:QuickfixRg(<q-args>)
+
+function! s:QuickfixRg(query)
+  let l:pattern = printf('"''%s''"|''"%s"''', a:query, a:query)
+  let l:rg_command = 'rg --column --line-number --no-heading ' . l:pattern
+  call fzf#vim#grep(l:rg_command, 1, {}, 1)
+endfunction
 
 " Customize fzf colors to match your color scheme
 " - fzf#wrap translates this to a set of `--color` options
@@ -253,6 +280,36 @@ function! s:disable_coc_for_type()
 endfunction
 autocmd BufRead,BufNewFile * call s:disable_coc_for_type()
 
+" ---------------------------------------------------------------------
+" Prevent coc.nvim from attaching to/to run on non-file/plugin buffers
+" ---------------------------------------------------------------------
+augroup CocBufferFiltering
+  autocmd!
+  " 1) If buffer has special buftype (nofile/terminal/quickfix/help) -> disable coc
+  autocmd BufReadPre,BufNewFile * if &buftype !=# '' |
+        \ let b:coc_enabled = 0 | let b:coc_suggest_disable = 1 |
+        \ endif
+
+  " 2) Explicitly disable for known plugin/file-name patterns (fugitive, fzf, netrw, NERDTree, undotree, etc.)
+  "    Adjust the list to taste (add/remove plugins you use).
+  autocmd BufReadPre,BufNewFile fugitive://*        let b:coc_enabled = 0 | let b:coc_suggest_disable = 1
+  autocmd BufReadPre,BufNewFile *fzf*              let b:coc_enabled = 0 | let b:coc_suggest_disable = 1
+  autocmd FileType fzf,fugitive,gitcommit,git,netrw,nerdtree,startify,undotree,help,qf
+        \    let b:coc_enabled = 0 | let b:coc_suggest_disable = 1
+augroup END
+
+" ---------------------------------------------------------------------
+" Extra safety: only let coc#api#Buf_flush run on normal file buffers
+" (this prevents the E158 invalid buffer name when some plugin buffer triggers BufEnter)
+" ---------------------------------------------------------------------
+augroup CocBufEnterGuard
+  autocmd!
+  autocmd BufEnter * if exists('*coc#api#Buf_flush') && &buftype ==# '' && bufname('%') !=# '' && bufname('%') !~# '^fugitive://' |
+        \ call coc#api#Buf_flush(expand('<abuf>')) |
+        \ endif
+augroup END
+
+
 set noshowmode
 filetype plugin indent on
 syntax enable
@@ -359,4 +416,6 @@ augroup Spockline
 augroup END
 
 set statusline=%!SpocklineActive()
+
+let g:javascript_plugin_jsdoc = 1
 

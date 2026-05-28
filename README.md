@@ -45,6 +45,24 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 2. Use `brew bundle` to install all of the packages in the `Brewfile`
 3. [Tips & Tricks](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
+## Codespaces
+
+For a Linux/Codespaces Vim setup, run the following from `/tmp/workspace/pheeria/dotfiles`:
+
+```shell
+make setup-codespaces
+make stow-codespaces
+make vim
+```
+
+Or run the combined target:
+
+```shell
+make codespaces
+```
+
+This installs the Vim dependencies (`fzf`, `rg`, `node`, `stow`, `vim`), stows the Vim and git dotfiles, and clones the Vim plugins into `~/.vim/pack`. Open Vim once afterwards so `coc.nvim` can finish installing its configured extensions.
+
 ## Further considerations
 1. Maybe use a tiling window manager like [Amethyst](https://ianyh.com/amethyst/) or [Yabai](https://github.com/koekeishiya/yabai)?
 

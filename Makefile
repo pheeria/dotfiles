@@ -14,7 +14,7 @@ define clone_repo
 	@mkdir -p "$(dir $(2))"
 	@if [ -d "$(2)/.git" ]; then \
 		echo "Updating $(2)"; \
-		git -C "$(2)" pull --ff-only || { echo "Failed to update $(2); resolve local changes or conflicts and retry."; exit 1; }; \
+		git -C "$(2)" pull --ff-only || { echo "Failed to update $(2); run git -C \"$(2)\" status, then commit/stash local changes or resolve conflicts before retrying."; exit 1; }; \
 	else \
 		echo "Cloning $(1)"; \
 		git clone "$(github)/$(1).git" "$(2)"; \

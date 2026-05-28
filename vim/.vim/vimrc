@@ -121,9 +121,6 @@ for s:fzf_path in s:fzf_paths
         execute 'set runtimepath+=' . fnameescape(s:fzf_path)
     endif
 endfor
-if exists('s:fzf_path')
-    unlet s:fzf_path
-endif
 unlet s:fzf_paths
 " Allow passing optional flags into Rg
 "	Example: :Rg myterm -g '*.md'

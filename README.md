@@ -47,7 +47,7 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 
 ## Codespaces
 
-For a Linux/Codespaces Vim setup, run the following from `/tmp/workspace/pheeria/dotfiles`:
+For a Linux/Codespaces Vim setup, run the following from the repository root:
 
 ```shell
 make setup-codespaces

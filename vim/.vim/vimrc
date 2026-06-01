@@ -38,6 +38,8 @@ set lazyredraw
 set formatoptions+=j
 
 set splitright splitbelow
+set undodir=~/.vim/undodir
+set undofile
 
 " Ripgrep
 set grepprg=rg\ --vimgrep
@@ -69,10 +71,6 @@ nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
 nnoremap <leader>zc :vs ~/.zshrc<CR>
 
 
-" UNDOTREE
-" ---- --
-set undodir=~/.vim/undodir
-set undofile
 
 
 " FUGITIVE

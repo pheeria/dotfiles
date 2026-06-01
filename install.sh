@@ -3,15 +3,6 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 readonly GITHUB="https://github.com"
-readonly PACK="$HOME/.vim/pack"
-
-detect_os() {
-  case "$(uname -s)" in
-    Darwin) echo "mac" ;;
-    Linux)  echo "linux" ;;
-    *)      echo "Unsupported OS: $(uname -s)" >&2; exit 1 ;;
-  esac
-}
 
 install_packages_mac() {
   if ! command -v brew >/dev/null 2>&1; then
@@ -43,7 +34,7 @@ clone_plugin() {
   if [[ -d "$dest/.git" ]]; then
     echo "Updating $slug"
     git -C "$dest" pull --ff-only || {
-      echo "Failed to update $dest; resolve conflicts in that directory and retry." >&2
+      echo "Failed to update $dest; investigate and resolve before retrying." >&2
       exit 1
     }
   elif [[ -n "$branch" ]]; then
@@ -56,51 +47,49 @@ clone_plugin() {
 }
 
 install_plugins() {
-  local visual="$PACK/visual/start"
-  local tpope="$PACK/tpope/start"
-  local junegunn="$PACK/junegunn/start"
-  local plugins="$PACK/plugins/start"
+  local plugins="$HOME/.vim/pack/plugins/start"
 
-  clone_plugin rakr/vim-one               "$visual/one"
-  clone_plugin arcticicestudio/nord-vim   "$visual/nord"
-  clone_plugin embark-theme/vim           "$visual/embark"
-  clone_plugin rose-pine/vim              "$visual/rose-pine"
-  clone_plugin leafgarland/typescript-vim "$visual/typescript"
-  clone_plugin pangloss/vim-javascript    "$visual/javascript"
-  clone_plugin MaxMEllon/vim-jsx-pretty   "$visual/jsx"
+  clone_plugin rakr/vim-one               "$plugins/one"
+  clone_plugin arcticicestudio/nord-vim   "$plugins/nord"
+  clone_plugin leafgarland/typescript-vim "$plugins/typescript"
+  clone_plugin pangloss/vim-javascript    "$plugins/javascript"
+  clone_plugin MaxMEllon/vim-jsx-pretty   "$plugins/jsx"
 
-  clone_plugin tpope/vim-commentary       "$tpope/commentary"
-  clone_plugin tpope/vim-fugitive         "$tpope/fugitive"
-  clone_plugin tpope/vim-projectionist    "$tpope/projectionist"
-  clone_plugin tpope/vim-repeat           "$tpope/repeat"
-  clone_plugin tpope/vim-sleuth           "$tpope/sleuth"
-  clone_plugin tpope/vim-surround         "$tpope/surround"
-  clone_plugin tpope/vim-unimpaired       "$tpope/unimpaired"
-  clone_plugin tpope/vim-vinegar          "$tpope/vinegar"
+  clone_plugin tpope/vim-commentary       "$plugins/commentary"
+  clone_plugin tpope/vim-fugitive         "$plugins/fugitive"
+  clone_plugin tpope/vim-projectionist    "$plugins/projectionist"
+  clone_plugin tpope/vim-repeat           "$plugins/repeat"
+  clone_plugin tpope/vim-sleuth           "$plugins/sleuth"
+  clone_plugin tpope/vim-surround         "$plugins/surround"
+  clone_plugin tpope/vim-unimpaired       "$plugins/unimpaired"
+  clone_plugin tpope/vim-vinegar          "$plugins/vinegar"
 
-  clone_plugin junegunn/fzf.vim           "$junegunn/fzf"
-  clone_plugin junegunn/goyo.vim          "$junegunn/goyo"
-  clone_plugin junegunn/limelight.vim     "$junegunn/limelight"
+  clone_plugin junegunn/fzf.vim           "$plugins/fzf"
+  clone_plugin junegunn/goyo.vim          "$plugins/goyo"
+  clone_plugin junegunn/limelight.vim     "$plugins/limelight"
 
-  clone_plugin neoclide/coc.nvim          "$plugins/coc" release
   clone_plugin plasticboy/vim-markdown    "$plugins/markdown"
   clone_plugin reedes/vim-pencil          "$plugins/pencil"
   clone_plugin vim-test/vim-test          "$plugins/test"
   clone_plugin vimwiki/vimwiki            "$plugins/wiki"
+  clone_plugin neoclide/coc.nvim          "$plugins/coc" release
+  clone_plugin embark-theme/vim           "$plugins/embark"
+  clone_plugin rose-pine/vim              "$plugins/rose-pine"
 }
 
 main() {
-  local os
-  os="$(detect_os)"
-
-  case "$os" in
-    mac)
+  case "$(uname -s)" in
+    Darwin)
       install_packages_mac
       link_dotfiles ghostty git zsh vim nvim misc
       ;;
-    linux)
+    Linux)
       install_packages_linux
       link_dotfiles git vim
+      ;;
+    *)
+      echo "Unsupported OS: $(uname -s)" >&2
+      exit 1
       ;;
   esac
 
@@ -108,4 +97,4 @@ main() {
   install_plugins
 }
 
-main "$@"
+main

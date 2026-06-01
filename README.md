@@ -45,23 +45,20 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 2. Use `brew bundle` to install all of the packages in the `Brewfile`
 3. [Tips & Tricks](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
-## Codespaces
+## Install
 
-For a Linux/Codespaces Vim setup, run the following from the repository root:
-
-```shell
-make setup-codespaces
-make stow-codespaces
-make vim
-```
-
-Or run the combined target:
+Single entry point for both macOS and Codespaces:
 
 ```shell
-make codespaces
+./install.sh
 ```
 
-This installs the Vim dependencies (`fzf`, `rg`, `node`, `stow`, `vim`), stows the Vim and git dotfiles, and clones the Vim plugins into `~/.vim/pack`. Open Vim once afterwards so `coc.nvim` can finish installing its configured extensions.
+- **macOS**: installs Homebrew if missing, runs `brew bundle`, stows `ghostty git zsh vim nvim misc`.
+- **Codespaces / Linux**: `apt-get install`s the Vim toolchain, stows `git vim`.
+
+Both paths clone the Vim plugin set into `~/.vim/pack`; `coc.nvim` is fetched from its `release` branch so it loads without a build step. Open Vim once after bootstrap to let `coc.nvim` install its configured extensions.
+
+For Codespaces specifically: point your personal "Dotfiles" setting at this repo and `install.sh` runs automatically on each new Codespace.
 
 ## Further considerations
 1. Maybe use a tiling window manager like [Amethyst](https://ianyh.com/amethyst/) or [Yabai](https://github.com/koekeishiya/yabai)?

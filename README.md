@@ -43,7 +43,6 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 ## Install
 
 Single entry point for both macOS and Codespaces `./install.sh`
-```
 
 - **macOS**: installs Homebrew if missing, runs `brew bundle`, stows `ghostty git zsh vim nvim misc`.
 - **Linux**: `apt-get install`s the Vim toolchain, stows `git vim`.

@@ -54,6 +54,7 @@ install_plugins() {
   clone_plugin leafgarland/typescript-vim "$plugins/typescript"
   clone_plugin pangloss/vim-javascript    "$plugins/javascript"
   clone_plugin MaxMEllon/vim-jsx-pretty   "$plugins/jsx"
+  clone_plugin drsooch/gruber-darker-vim  "$plugins/gruber-darker"
 
   clone_plugin tpope/vim-commentary       "$plugins/commentary"
   clone_plugin tpope/vim-fugitive         "$plugins/fugitive"

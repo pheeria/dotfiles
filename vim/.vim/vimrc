@@ -38,6 +38,8 @@ set lazyredraw
 set formatoptions+=j
 
 set splitright splitbelow
+set undodir=~/.vim/undodir
+set undofile
 
 " Ripgrep
 set grepprg=rg\ --vimgrep
@@ -67,13 +69,6 @@ let mapleader = " "
 nnoremap <leader>qq :bd<CR>
 nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
 nnoremap <leader>zc :vs ~/.zshrc<CR>
-
-
-" UNDOTREE
-" ---- --
-set undodir=~/.vim/undodir
-set undofile
-nnoremap <leader>u :UndotreeToggle<CR>
 
 
 " FUGITIVE
@@ -110,7 +105,17 @@ augroup END
 
 " FZF / Ripgrep
 " ---- --
-set runtimepath+=/opt/homebrew/opt/fzf
+let s:fzf_paths = [
+    \ '/opt/homebrew/opt/fzf',
+    \ '/usr/local/opt/fzf',
+    \ '/usr/share/fzf',
+    \ ]
+for s:fzf_path in s:fzf_paths
+    if isdirectory(s:fzf_path)
+        execute 'set runtimepath+=' . fnameescape(s:fzf_path)
+    endif
+endfor
+unlet s:fzf_paths
 " Allow passing optional flags into Rg
 "	Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg

@@ -4,6 +4,7 @@ export EDITOR=vim
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
 
 export ZSH="$XDG_CONFIG_HOME/zsh"
 # Dump my completions to your cache
@@ -34,7 +35,6 @@ export HOMEBREW_INSTALL_BADGE="🧉"
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
 alias sz="source ~/.zshrc"
-alias bl="vim -u ~/.personal/bl/vimrc ~/.personal/bl/blaue_laube.md"
 
 # Reinventing the wheel
 alias start="open -a "

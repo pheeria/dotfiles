@@ -34,20 +34,20 @@ defaults -currentHost write -g AppleFontSmoothing -int 0
 2. [Cascadia Code](https://github.com/microsoft/cascadia-code)
 3. [Martian Mono](https://github.com/evilmartians/mono)
 
-## iTerm
-1. Go to `General -> Preferences -> Load Preferences from a custom folder`
-2. Point to `dotfiles/iTerm`
-3. In `Profiles -> Terminal` turn on `Unlimited Scrollback`
-
 ## Brew
 
 1. Use `brew bundle dump` to create a dumpfile with all of the currently installed brew packages (add `--force` if the file exists)
 2. Use `brew bundle` to install all of the packages in the `Brewfile`
 3. [Tips & Tricks](https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f)
 
-## Further considerations
-1. Maybe use a tiling window manager like [Amethyst](https://ianyh.com/amethyst/) or [Yabai](https://github.com/koekeishiya/yabai)?
+## Install
 
+Single entry point for both macOS and Codespaces `./install.sh`
+
+- **macOS**: installs Homebrew if missing, runs `brew bundle`, stows `ghostty git zsh vim nvim misc`.
+- **Linux**: `apt-get install`s the Vim toolchain, stows `git vim`.
+
+Both paths clone the Vim plugin set into `~/.vim/pack`; `coc.nvim` is fetched from its `release` branch so it loads without a build step. Open Vim once after bootstrap to let `coc.nvim` install its configured extensions.
 
 ## Vim
 ### How to update Vim?

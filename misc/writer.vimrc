@@ -20,7 +20,7 @@ set smartcase
 
 set incsearch                       " search as characters are entered
 set showcmd                         " display incomplete commands
-set wildmenu			    " visual autocomplete for command menu
+set wildmenu			            " visual autocomplete for command menu
 
 " Switch faster between Insert and Normal modes
 set timeout timeoutlen=3000 ttimeoutlen=100
@@ -35,11 +35,8 @@ nnoremap <leader>w :write<CR>
 nnoremap <leader>s :Goyo<CR> :SoftPencil<CR>
 nnoremap <leader>t :Toc<CR>
 
-" UNDOTREE
-" ---- --
 set undodir=~/.vim/undodir
 set undofile
-nnoremap <leader>u :UndotreeToggle<CR>
 
 " Goyo / Limelight
 " ---- --

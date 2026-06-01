@@ -73,7 +73,6 @@ nnoremap <leader>zc :vs ~/.zshrc<CR>
 " ---- --
 set undodir=~/.vim/undodir
 set undofile
-nnoremap <leader>u :UndotreeToggle<CR>
 
 
 " FUGITIVE
@@ -114,7 +113,6 @@ let s:fzf_paths = [
     \ '/opt/homebrew/opt/fzf',
     \ '/usr/local/opt/fzf',
     \ '/usr/share/fzf',
-    \ '/usr/share/doc/fzf/examples',
     \ ]
 for s:fzf_path in s:fzf_paths
     if isdirectory(s:fzf_path)

@@ -71,8 +71,6 @@ nnoremap <leader>vc :vs ~/.vim/vimrc<CR>
 nnoremap <leader>zc :vs ~/.zshrc<CR>
 
 
-
-
 " FUGITIVE
 " ---- --
 nnoremap <leader>gc :Gdiffsplit<CR>

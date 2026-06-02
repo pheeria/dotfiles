@@ -19,7 +19,7 @@ install_packages_linux() {
 link_dotfiles() {
   local pkg
   for pkg in "$@"; do
-    stow --restow "$pkg"
+    stow --target="$HOME" --no-folding --restow "$pkg"
   done
 }
 
@@ -86,7 +86,7 @@ main() {
       ;;
     Linux)
       install_packages_linux
-      link_dotfiles git vim
+      link_dotfiles git vim zsh
       ;;
     *)
       echo "Unsupported OS: $(uname -s)" >&2

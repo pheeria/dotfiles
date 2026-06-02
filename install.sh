@@ -16,10 +16,23 @@ install_packages_linux() {
   sudo apt-get install -y curl fzf git nodejs npm python3 python3-pip ripgrep stow vim
 }
 
+backup_conflicts() {
+  local pkg="$1" file rel target
+  while IFS= read -r -d '' file; do
+    rel="${file#$pkg/}"
+    target="$HOME/$rel"
+    if [[ -f "$target" && ! -L "$target" ]]; then
+      echo "Backing up $target -> $target.predotfiles" >&2
+      mv "$target" "$target.predotfiles"
+    fi
+  done < <(git ls-files -z -- "$pkg")
+}
+
 link_dotfiles() {
   local pkg
   for pkg in "$@"; do
-    stow --target="$HOME" --no-folding --restow "$pkg"
+    backup_conflicts "$pkg"
+    stow --target="$HOME" --dir="$PWD" --no-folding --restow "$pkg"
   done
 }
 

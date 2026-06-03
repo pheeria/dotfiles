@@ -32,15 +32,6 @@ chpwd() {
   fi
 }
 
-# Merge latest changes to the current branch
-glatest() {
-  keep_branch=$(git_current_branch)
-  git checkout $(git_main_branch)
-  git pull -p
-  git checkout $keep_branch
-  git merge --no-edit $(git_main_branch)
-}
-
 # Core-JS ads
 # npm set fund false
 # npm set audit false

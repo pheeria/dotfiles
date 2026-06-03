@@ -13,12 +13,6 @@ plugins=(z)
 source $ZSH/miniomz.sh
 source $ZSH/spock.zsh
 
-# Edit in Vim, instead of the terminal
-# https://youtu.be/mz9LBUteKNo
-autoload -z edit-command-line
-zle -N edit-command-line
-bindkey "^X^X" edit-command-line
-
 # Use Vim as pager for man
 export MANPAGER="vim -M +MANPAGER -"
 

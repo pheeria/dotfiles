@@ -7,9 +7,6 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
 export ZSH="$XDG_CONFIG_HOME/zsh"
-# Dump my completions to your cache
-export ZSH_COMPDUMP="$ZSH/.zcompdump-${ZSH_VERSION}"
-plugins=(z)
 source $ZSH/miniomz.sh
 source $ZSH/spock.zsh
 
@@ -32,9 +29,7 @@ chpwd() {
   fi
 }
 
-# Core-JS ads
-# npm set fund false
-# npm set audit false
+# Ads
 export ADBLOCK=1
 export DISABLE_OPENCOLLECTIVE=1
 

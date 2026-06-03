@@ -1,16 +1,8 @@
-# If ZSH is not defined, use the current script's directory.
-[[ -z "$ZSH" ]] && export ZSH="${${(%):-%x}:a:h}"
+# Dump my completions to your cache
+export ZSH_COMPDUMP="$ZSH/.zcompdump-${ZSH_VERSION}"
 
 # Set ZSH_CACHE_DIR to the path where cache files should be created
-# or else we will use the default cache/
-if [[ -z "$ZSH_CACHE_DIR" ]]; then
-  ZSH_CACHE_DIR="$ZSH/cache"
-fi
-
-# Make sure $ZSH_CACHE_DIR is writable, otherwise use a directory in $HOME
-if [[ ! -w "$ZSH_CACHE_DIR" ]]; then
-  ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
-fi
+ZSH_CACHE_DIR="$ZSH/cache"
 
 # Create cache and completions dir and add to $fpath
 mkdir -p "$ZSH_CACHE_DIR/completions"
@@ -24,6 +16,7 @@ fpath=("$ZSH/functions" "$ZSH/completions" $fpath)
 # Load all stock functions (from $fpath files) called below.
 autoload -U compaudit compinit zrecompile
 
+plugins=(z)
 is_plugin() {
   local base_dir=$1
   local name=$2
@@ -37,7 +30,7 @@ for plugin ($plugins); do
   if is_plugin "$ZSH" "$plugin"; then
     fpath=("$ZSH/plugins/$plugin" $fpath)
   else
-    echo "[oh-my-zsh] plugin '$plugin' not found"
+    echo "plugin '$plugin' not found"
   fi
 done
 

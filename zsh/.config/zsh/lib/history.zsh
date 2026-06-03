@@ -1,3 +1,8 @@
+## History file configuration
+HISTFILE="$ZSH/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
+
 ## History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE

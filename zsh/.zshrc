@@ -8,15 +8,10 @@ export XDG_CACHE_HOME=$HOME/.cache
 
 export ZSH="$XDG_CONFIG_HOME/zsh"
 # Dump my completions to your cache
-export ZSH_COMPDUMP=$ZSH/.zcompdump-${ZSH_VERSION}
+export ZSH_COMPDUMP="$ZSH/.zcompdump-${ZSH_VERSION}"
 plugins=(z)
 source $ZSH/miniomz.sh
 source $ZSH/spock.zsh
-
-## History file configuration
-HISTFILE="$ZSH/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=10000
 
 # Edit in Vim, instead of the terminal
 # https://youtu.be/mz9LBUteKNo
@@ -35,12 +30,6 @@ export HOMEBREW_INSTALL_BADGE="🧉"
 alias vc="vim ~/.vim/vimrc"
 alias zc="vim ~/.zshrc"
 alias sz="source ~/.zshrc"
-
-# Reinventing the wheel
-alias start="open -a "
-finish() {
-    osascript -e "quit app \"$1\""
-}
 
 # Custom scripts per directory
 chpwd() {
@@ -82,8 +71,8 @@ export DO_NOT_TRACK=1
 export NEXT_TELEMETRY_DISABLED=1
 
 # Where to find executables
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/usr/local/bin:$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
+[[ "$OSTYPE" == darwin* && -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:/usr/local/bin:$PATH"
 
 # Python 
 export PYTHONDONTWRITEBYTECODE=1

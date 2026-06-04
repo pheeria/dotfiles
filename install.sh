@@ -13,7 +13,7 @@ install_packages_mac() {
 
 install_packages_linux() {
   sudo apt-get update
-  sudo apt-get install -y curl fzf git nodejs npm python3 python3-pip ripgrep stow vim
+  sudo apt-get install -y curl fzf git jq nodejs npm python3 python3-pip ripgrep stow vim
 }
 
 backup_conflicts() {
@@ -98,6 +98,21 @@ install_terminfo() {
   fi
 }
 
+install_codespaces_vscode() {
+  local src="$PWD/misc/Library/Application Support/Code/User/settings.json"
+  local dir="$HOME/.vscode-remote/data/Machine"
+  local target="$dir/settings.json"
+
+  mkdir -p "$dir"
+  if [[ -f "$target" ]]; then
+    local tmp; tmp=$(mktemp)
+    jq -s '.[0] * .[1]' "$target" "$src" > "$tmp"
+    mv "$tmp" "$target"
+  else
+    cp "$src" "$target"
+  fi
+}
+
 generate_helptags() {
   local doc
   for doc in "$HOME/.vim/pack/plugins/start"/*/doc; do
@@ -115,6 +130,9 @@ main() {
     Linux)
       install_packages_linux
       link_dotfiles git vim zsh
+      if [[ -n "${CODESPACES:-}" ]]; then
+        install_codespaces_vscode
+      fi
       ;;
     *)
       echo "Unsupported OS: $(uname -s)" >&2

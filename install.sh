@@ -91,6 +91,21 @@ install_plugins() {
   clone_plugin rose-pine/vim              "$plugins/rose-pine"
 }
 
+install_terminfo() {
+  local src="terminfo/xterm-ghostty.src"
+  if command -v tic >/dev/null 2>&1 && [[ -f "$src" ]]; then
+    tic -x "$src"
+  fi
+}
+
+generate_helptags() {
+  local doc
+  for doc in "$HOME/.vim/pack/plugins/start"/*/doc; do
+    [[ -d "$doc" ]] || continue
+    vim -u NONE -es -c "helptags $doc" -c q
+  done
+}
+
 main() {
   case "$(uname -s)" in
     Darwin)
@@ -108,7 +123,9 @@ main() {
   esac
 
   ensure_runtime_dirs
+  install_terminfo
   install_plugins
+  generate_helptags
 }
 
 main
